@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import modelo.gestoresplazas.GestorLocalidad;
 import modelo.gestoresplazas.GestorZona;
+import modelo.gestoresplazas.huecos.Hueco;
 import modelo.vehiculos.Vehiculo;
 
 public class SolicitudReservaInmediata extends SolicitudReserva {
@@ -31,7 +32,6 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         return false;
     }
     
-    // TODO muy ineficiente!
     @Override
     public void gestionarSolicitudReserva(GestorLocalidad gestor) {
         if (esValida(gestor)) {
@@ -47,16 +47,20 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                 for (int dist = 1; dist <= radio && !reservado; dist++) {
                     int[][] coords = new int[dist * 4][2];
 
-                    generarVecinos(coords, dist);
-                    ordenarPorPrecio(coords, gestor, iZona, jZona);
+                    generarVecinos(coords, dist, iZona, jZona);
+                    ordenarPorPrecio(coords, gestor);
+
+                    Hueco hueco;
 
                     for (int i = 0; i < coords.length && !reservado; i++) {
                         int[] coord = coords[i];
-                        if (gestor.existeZona(coord[0], coord[1])) {
-                            GestorZona gestorZona = gestor.getGestorZona(coord[0] + iZona, coord[1] + jZona);
-                            
-                            if (gestorZona.reservarHueco(super.getTInicial(), super.getTFinal()) != null)
-                                reservado = true;
+                        GestorZona gestorZona = gestor.getGestorZona(coord[0], coord[1]);
+
+                        if ((hueco = gestorZona.reservarHueco(super.getTInicial(), super.getTFinal())) != null) {
+                            super.setGestorZona(gestorZona);
+                            super.setHueco(hueco);
+
+                            reservado = true;
                         }
                     }
                 }
@@ -64,22 +68,22 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
-    private void generarVecinos(int[][] coords, int dist) {
+    private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
         int coordI = 0;
         int coordJ = -dist;
 
         for (int offset = 0; offset < dist ; offset++) {
-            coords[0 * dist + offset] = new int[] {coordI, coordJ};
-            coords[1 * dist + offset] = new int[] {-coordJ, coordI};
-            coords[2 * dist + offset] = new int[] {-coordI, -coordJ};
-            coords[3 * dist + offset] = new int[] {coordJ, -coordI};
+            coords[0 * dist + offset] = new int[] {coordI + iZona, coordJ + jZona};
+            coords[1 * dist + offset] = new int[] {-coordJ + iZona, coordI + jZona};
+            coords[2 * dist + offset] = new int[] {-coordI + iZona, -coordJ + jZona};
+            coords[3 * dist + offset] = new int[] {coordJ + iZona, -coordI + jZona};
 
             coordI++;
             coordJ++;
         }
     }
 
-    private void ordenarPorPrecio(int[][] coords, GestorLocalidad gestor, int iZona, int jZona) {
+    private void ordenarPorPrecio(int[][] coords, GestorLocalidad gestor) {
         int longitud = coords.length;
 
         for (int i = 0; i < longitud - 1; i++) {
@@ -89,15 +93,13 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                 int[] coord1 = coords[j];
                 int[] coord2 = coords[j + 1];
 
-                GestorZona gestorZona1 = gestor.getGestorZona(coord1[0] + iZona, coord1[1] + jZona);
-                GestorZona gestorZona2 = gestor.getGestorZona(coord2[0] + iZona, coord2[1] + jZona);
+                GestorZona gestorZona1 = gestor.getGestorZona(coord1[0], coord1[1]);
+                GestorZona gestorZona2 = gestor.getGestorZona(coord2[0], coord2[1]);
 
                 if (gestorZona1.getPrecio() < gestorZona2.getPrecio()) {
-                    int aux1 = coord1[0];  
-                    int aux2 = coord2[1];  
-
-                    coords[j] = coords[j + 1];
-                    coords[j + 1] = new int[] {aux1, aux2};
+                    int[] aux = {coord1[0], coord1[1]};
+                    coords[j] = coord2;
+                    coords[j + 1] = aux;
 
                     ordenado = false;
                 }

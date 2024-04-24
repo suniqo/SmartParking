@@ -51,6 +51,7 @@ public class GestorLocalidad {
 	public GestorZona getGestorZona(int i, int j)  {
         if(!existeZona(i, j)) {
             // TODO excepcion?
+            return null;
         }
 		return gestorZonas[i][j];
 	}
