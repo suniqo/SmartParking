@@ -88,7 +88,7 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
 
         for (int i = 0; i < longitud - 1; i++) {
 
-            boolean ordenado = true;
+            boolean ordenado = false;
             for (int j = 0; j < longitud - i - 1; j++) {
                 int[] coord1 = coords[j];
                 int[] coord2 = coords[j + 1];
@@ -96,16 +96,16 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                 GestorZona gestorZona1 = gestor.getGestorZona(coord1[0], coord1[1]);
                 GestorZona gestorZona2 = gestor.getGestorZona(coord2[0], coord2[1]);
 
-                if (gestorZona1.getPrecio() < gestorZona2.getPrecio()) {
+                if (gestorZona1.getPrecio() > gestorZona2.getPrecio()) {
                     int[] aux = {coord1[0], coord1[1]};
                     coords[j] = coord2;
                     coords[j + 1] = aux;
 
-                    ordenado = false;
+                    ordenado = true;
                 }
             }
 
-            if (ordenado) break;
+            if (ordenado) break; // TODO preguntar es ineficiente?
         }
     }
 }

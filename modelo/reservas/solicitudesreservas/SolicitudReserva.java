@@ -67,8 +67,6 @@ public class SolicitudReserva {
 		return vehiculo;
 	}
 	
-	//TO-DO alumno obligatorio
-	//TODO uso de isBefore LocalDateTime
 	public boolean esValida(GestorLocalidad gestorLocalidad) {
         return gestorLocalidad.existeZona(iZona, jZona)
             && tInicial.isBefore(tFinal)

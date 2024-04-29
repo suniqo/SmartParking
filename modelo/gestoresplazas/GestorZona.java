@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import list.ArrayList;
 import list.IList;
+
 import modelo.gestoresplazas.huecos.GestorHuecos;
 import modelo.gestoresplazas.huecos.Hueco;
 import modelo.gestoresplazas.huecos.Plaza;
@@ -55,8 +56,6 @@ public class GestorZona {
 		return getId() + ": " + getEstadoHuecosReservados();
 	}
 	
-	//TO-DO alumno obligatorios
-	
 	public GestorZona(int i, int j, int noPlazas, double precio) {
         iZona = i;
         jZona = j;
@@ -71,7 +70,7 @@ public class GestorZona {
 	}
 
 	public Hueco reservarHueco(LocalDateTime tI, LocalDateTime tF) {
-        if (gestorHuecos.existeHueco(tI, tF)) {
+        if (existeHueco(tI, tF)) {
             Hueco huecoReservado = gestorHuecos.reservarHueco(tI, tF);
             huecosReservados.add(huecosReservados.size(), huecoReservado);
             return huecoReservado;
@@ -82,12 +81,12 @@ public class GestorZona {
 	public void meterEnListaEspera(SolicitudReservaAnticipada solicitud) {
         listaEspera.add(listaEspera.size(), solicitud);
 	}
+
 	
 	public boolean existeHuecoReservado(Hueco hueco) {
         return huecosReservados.indexOf(hueco) != -1;
 	}
 	
-	//TODO opcional
 	public void liberarHueco(Hueco hueco) {
         huecosReservados.remove(hueco);
         gestorHuecos.liberarHueco(hueco);
@@ -95,7 +94,20 @@ public class GestorZona {
 
 	//PRE (no es necesario comprobar): las solicitudes de la lista de espera son válidas
 	public IList<SolicitudReservaAnticipada> getSolicitudesAtendidasListaEspera() {
-        //TODO
-        return null;
+        IList<SolicitudReservaAnticipada> res = new ArrayList<SolicitudReservaAnticipada>();
+
+        for(int i = 0; i<listaEspera.size(); i++) {
+            SolicitudReservaAnticipada solicitud = listaEspera.get(i);
+
+            if(existeHueco(solicitud.getTInicial(), solicitud.getTFinal())) {
+                res.add(res.size(), listaEspera.get(i));
+                listaEspera.removeElementAt(i);
+            }
+        }
+        return res;
 	}
+
+    public boolean existeHueco(LocalDateTime tI, LocalDateTime tF) {
+        return gestorHuecos.existeHueco(tI, tF);
+    }
 }

@@ -4,18 +4,26 @@ import controladores.excepciones.PlazaOcupada;
 import controladores.excepciones.ReservaInvalida;
 import controladores.excepciones.SolicitudReservaInvalida;
 import list.IList;
+import list.ArrayList;
 import modelo.gestoresplazas.GestorLocalidad;
+import modelo.gestoresplazas.huecos.Hueco;
 import modelo.reservas.EstadoValidez;
 import modelo.reservas.Reserva;
 import modelo.reservas.Reservas;
 import modelo.reservas.solicitudesreservas.SolicitudReserva;
+import modelo.reservas.solicitudesreservas.SolicitudReservaAnticipada;
 import modelo.vehiculos.Vehiculo;
+
 import anotacion.Programacion2;
 
 @Programacion2 (
-		nombreAutor1 = "",
-		apellidoAutor1 = "",
-		emailUPMAutor1 = ""
+		nombreAutor1 = "Andrés",
+		apellidoAutor1 = "Súnico Sánchez",
+		emailUPMAutor1 = "andres.sunico",
+		nombreAutor2 = "Samuel",
+		apellidoAutor2 = "Álvarez Salido",
+		emailUPMAutor2 = "samuel.alvarez"
+
 		)
 
 public class ControladorReservas {
@@ -41,41 +49,64 @@ public class ControladorReservas {
 	//TO-DO alumno obligatorio
 
 	public ControladorReservas(int[][] plazas, double[][] precios) {
-		//TO-DO
+        gestorLocalidad = new GestorLocalidad(plazas, precios);
+        registroReservas = new Reservas();
 	}
 
 
 	//PRE: la solicitud es válida
 	public int hacerReserva(SolicitudReserva solicitud) throws SolicitudReservaInvalida {
-		//TO-DO
-		return -1;
+        if (!solicitud.esValida(gestorLocalidad)) {
+            throw new SolicitudReservaInvalida("Solicitud inválida, o bien la zona seleccionada no existe en la localidad, " + 
+                    "el tiempo inicial excede al tiempo final o su vehiculo está sancionado.");
+        }
+        solicitud.gestionarSolicitudReserva(gestorLocalidad);
+        return solicitud.getHueco() == null ? -1 : registroReservas.registrarReserva(solicitud);
 	}
 
 	public Reserva getReserva(int numReserva) {
-		//TO-DO
-		return null;
+		return registroReservas.obtenerReserva(numReserva);
 	}
 
 	//PRE: la plaza dada está libre y la reserva está validada
 	public void ocuparPlaza(int i, int j, int numPlaza, int numReserva, Vehiculo vehiculo) throws PlazaOcupada, ReservaInvalida {
-		//TO-DO
+        Reserva reserva = registroReservas.obtenerReserva(numReserva);
+        Hueco hueco = reserva.getHueco();
+        if (gestorLocalidad.existeHuecoReservado(hueco, i, j)) {
+            throw new PlazaOcupada("La plaza ya está ocupada");
+        }
+        if (!esValidaReserva(i, j, numPlaza, numReserva, vehiculo.getMatricula())) {
+            throw new ReservaInvalida("La reserva con número " + numReserva +" no es válida.");
+        }
+        hueco.getPlaza().setVehiculo(vehiculo);
 	}
 
 
 	//TO-DO alumno opcional
 
 	public void desocuparPlaza(int numReserva) {
-		//TO-DO
+        Reserva reserva = registroReservas.obtenerReserva(numReserva);
+        Hueco hueco = reserva.getHueco();
+        hueco.getPlaza().setVehiculo(null);
+        reserva.getGestorZona().liberarHueco(hueco);
 	}
 
 	public void anularReserva(int numReserva) {
-		//TO-DO
+        Reserva reserva = registroReservas.obtenerReserva(numReserva);
+        reserva.getGestorZona().liberarHueco(reserva.getHueco());
+        registroReservas.borrarReserva(numReserva);
 	}
 
 		
 	// PRE (no es necesario comprobar): todas las solicitudes atendidas son válidas.
 	public IList<Integer> getReservasRegistradasDesdeListaEspera(int i, int j){
-		//TO-DO
-		return null;
+        IList<SolicitudReservaAnticipada> solicitudesAtendidas = gestorLocalidad.getGestorZona(i, j).getSolicitudesAtendidasListaEspera();
+        IList<Integer> res = new ArrayList<Integer>();
+
+        for (int k = 0; k < solicitudesAtendidas.size(); k++) {
+            res.add(k, registroReservas.registrarReserva(solicitudesAtendidas.get(k)));
+        }
+
+		return res;
 	}
 }
