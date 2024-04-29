@@ -61,6 +61,10 @@ public class GestorZona {
         jZona = j;
 
         plazas  = new Plaza[noPlazas];
+        for (int k = 0; k < plazas.length; k++) {
+            plazas[k] = new Plaza(k);
+        }
+
         gestorHuecos = new GestorHuecos(plazas);
 
         listaEspera =  new ArrayList<SolicitudReservaAnticipada>();
