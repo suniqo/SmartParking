@@ -46,16 +46,17 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                 boolean reservado = false;
 
                 for (int dist = 1; dist <= radio && !reservado; dist++) {
-                    ArrayList<int[]> coords = new ArrayList<int[]>();
+                    int[][] coords = new int[dist * 4][2];
+
 
                     generarVecinos(coords, dist, iZona, jZona);
-                    quitarCoordsFueraDeRango(coords, gestor);
-                    ordenarPorPrecio(coords, gestor);
+                    ArrayList<int[]> coordsValidas = quitarCoordsFueraDeRango(coords, gestor);
+                    ordenarPorPrecio(coordsValidas, gestor);
 
                     Hueco hueco;
 
-                    for (int i = 0; i < coords.size() && !reservado; i++) {
-                        int[] coord = coords.get(i);
+                    for (int i = 0; i < coordsValidas.size() && !reservado; i++) {
+                        int[] coord = coordsValidas.get(i);
                         GestorZona gestorZona = gestor.getGestorZona(coord[0], coord[1]);
 
                         if ((hueco = gestorZona.reservarHueco(super.getTInicial(), super.getTFinal())) != null) {
@@ -70,29 +71,30 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
-    private void generarVecinos(ArrayList<int[]> coords, int dist, int iZona, int jZona) {
+    private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
         int coordI = 0;
         int coordJ = -dist;
 
         for (int offset = 0; offset < dist ; offset++) {
-            
-            coords.add(0 * dist + offset, new int[] {coordI + iZona, coordJ + jZona});
-            coords.add(1 * dist + offset, new int[] {-coordJ + iZona, coordI + jZona});
-            coords.add(2 * dist + offset, new int[] {-coordI + iZona, -coordJ + jZona});
-            coords.add(3 * dist + offset, new int[] {coordJ + iZona, -coordI + jZona});
+            coords[0 * dist + offset] = new int[] {coordI + iZona, coordJ + jZona};
+            coords[1 * dist + offset] = new int[] {-coordJ + iZona, coordI + jZona};
+            coords[2 * dist + offset] = new int[] {-coordI + iZona, -coordJ + jZona};
+            coords[3 * dist + offset] = new int[] {coordJ + iZona, -coordI + jZona};
 
             coordI++;
             coordJ++;
         }
     }
 
-    private void quitarCoordsFueraDeRango(ArrayList<int[]> coords, GestorLocalidad gestor) {
-        for (int i = 0; i < coords.size(); i++) {
-            int[] coord = coords.get(i);
-            if (!gestor.existeZona(coord[0], coord[1])) {
-                coords.remove(coord);
+    private ArrayList<int[]> quitarCoordsFueraDeRango(int[][] coords, GestorLocalidad gestor) {
+        ArrayList<int[]> res = new ArrayList<int[]>();
+        for (int i = 0; i < coords.length; i++) {
+            int[] coord = coords[i];
+            if (gestor.existeZona(coord[0], coord[1])) {
+                res.add(res.size(), coord);
             }
         }
+        return res;
     }
 
     private void ordenarPorPrecio(ArrayList<int[]> coords, GestorLocalidad gestor) {
