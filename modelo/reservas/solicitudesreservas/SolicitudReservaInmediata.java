@@ -100,9 +100,10 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
     private void ordenarPorPrecio(ArrayList<int[]> coords, GestorLocalidad gestor) {
         int longitud = coords.size();
 
-        for (int i = 0; i < longitud - 1; i++) {
+        boolean ordenado = false;
+        for (int i = 0; i < longitud - 1 && !ordenado; i++) {
 
-            boolean ordenado = false;
+            ordenado = true;
             for (int j = 0; j < longitud - i - 1; j++) {
                 int[] coord1 = coords.get(j);
                 int[] coord2 = coords.get(j + 1);
@@ -115,11 +116,9 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                     coords.set(j, coord2);
                     coords.set(j + 1, aux);
 
-                    ordenado = true;
+                    ordenado = false;
                 }
             }
-
-            if (ordenado) break; // TODO preguntar es ineficiente?
         }
     }
 }

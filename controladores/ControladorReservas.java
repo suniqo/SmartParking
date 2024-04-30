@@ -72,7 +72,7 @@ public class ControladorReservas {
 	public void ocuparPlaza(int i, int j, int numPlaza, int numReserva, Vehiculo vehiculo) throws PlazaOcupada, ReservaInvalida {
         Reserva reserva = registroReservas.obtenerReserva(numReserva);
         Hueco hueco = reserva.getHueco();
-        if (gestorLocalidad.existeHuecoReservado(hueco, i, j)) {
+        if (hueco.getPlaza().getVehiculo() != null) {
             throw new PlazaOcupada("La plaza ya está ocupada");
         }
         if (!esValidaReserva(i, j, numPlaza, numReserva, vehiculo.getMatricula())) {
