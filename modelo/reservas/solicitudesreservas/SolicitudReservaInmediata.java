@@ -60,24 +60,27 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
+
+    /*** Métodos Auxiliares ***/
+
     private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
-        int coordI = 0;
-        int coordJ = -dist;
+        
+        int[] vec = {0, -dist};
+        
+        for (int offset = 0; offset < dist; offset++) {
+            coords[dist*0 + offset] = new int[] {vec[0] + iZona, vec[1] + jZona};
+            coords[dist*1 + offset] = new int[] {-1 * vec[1] + iZona, vec[0] + jZona};
+            coords[dist*2 + offset] = new int[] {-1 * vec[0] + iZona, -1 * vec[1] + jZona};
+            coords[dist*3 + offset] = new int[] {vec[1] + iZona, -1 * vec[0] + jZona};
 
-        for (int offset = 0; offset < dist ; offset++) {
-            coords[0 * dist + offset] = new int[] {coordI + iZona, coordJ + jZona};
-            coords[1 * dist + offset] = new int[] {-coordJ + iZona, coordI + jZona};
-            coords[2 * dist + offset] = new int[] {-coordI + iZona, -coordJ + jZona};
-            coords[3 * dist + offset] = new int[] {coordJ + iZona, -coordI + jZona};
+            vec[0]++;
+            vec[1]++;
 
-            coordI++;
-            coordJ++;
         }
     }
 
     private void quitarCoordsFueraDeRango(ArrayList<int[]> coordsValidas, int[][] coords, GestorLocalidad gestor) {
-        for (int i = 0; i < coords.length; i++) {
-            int[] coord = coords[i];
+        for (int[] coord: coords) {
             if (gestor.existeZona(coord[0], coord[1])) {
                 coordsValidas.add(coordsValidas.size(), coord);
             }
@@ -85,13 +88,13 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
     }
 
     private void ordenarPorPrecio(ArrayList<int[]> coords, GestorLocalidad gestor) {
-        int longitud = coords.size();
+        int length = coords.size();
 
         boolean ordenado = false;
-        for (int i = 0; i < longitud - 1 && !ordenado; i++) {
+        for (int i = 0; i < length - 1 && !ordenado; i++) {
 
             ordenado = true;
-            for (int j = 0; j < longitud - i - 1; j++) {
+            for (int j = 0; j < length - i - 1; j++) {
                 int[] coord1 = coords.get(j);
                 int[] coord2 = coords.get(j + 1);
 
@@ -125,7 +128,6 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                 reservado = true;
             }
         }
-
         return reservado;
     }
 }
