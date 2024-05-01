@@ -74,12 +74,10 @@ public class GestorZona {
 	}
 
 	public Hueco reservarHueco(LocalDateTime tI, LocalDateTime tF) {
-        if (existeHueco(tI, tF)) {
-            Hueco huecoReservado = gestorHuecos.reservarHueco(tI, tF);
-            huecosReservados.add(huecosReservados.size(), huecoReservado);
-            return huecoReservado;
-        }
-		return null;
+        Hueco huecoReservado = gestorHuecos.reservarHueco(tI, tF);
+        if(huecoReservado != null)
+        	huecosReservados.add(huecosReservados.size(), huecoReservado);
+	    return huecoReservado;
 	}
 	
 	public void meterEnListaEspera(SolicitudReservaAnticipada solicitud) {
@@ -95,32 +93,36 @@ public class GestorZona {
         huecosReservados.remove(hueco);
         gestorHuecos.liberarHueco(hueco);
 	}
-
+	
 	//PRE (no es necesario comprobar): las solicitudes de la lista de espera son válidas
 	public IList<SolicitudReservaAnticipada> getSolicitudesAtendidasListaEspera() {
         IList<SolicitudReservaAnticipada> res = new ArrayList<SolicitudReservaAnticipada>();
-
-        for(int i = 0; i < listaEspera.size(); i++) {
-            SolicitudReservaAnticipada solicitud = listaEspera.get(i);
-            LocalDateTime tI = solicitud.getTInicial();
-            LocalDateTime tF = solicitud.getTFinal();
+        IList<SolicitudReservaAnticipada> newListaEspera = new ArrayList<SolicitudReservaAnticipada>();
+        
+        for(int i = 0; i<listaEspera.size(); i++) {
             
-            if(existeHueco(tI, tF)) {
-                solicitud.setHueco(reservarHueco(tI, tF));
+        	SolicitudReservaAnticipada solicitud = listaEspera.get(i);
+            Hueco hueco = reservarHueco(solicitud.getTInicial(), solicitud.getTFinal());
+            
+            if(hueco != null) {
                 res.add(res.size(), solicitud);
-                listaEspera.removeElementAt(i);
-                i--;
-            }
+                solicitud.setHueco(hueco);
+            }else
+            	newListaEspera.add(newListaEspera.size(), listaEspera.get(i));
         }
-
-        for (int i = 0; i < res.size(); i++) {
-            liberarHueco(res.get(i).getHueco());
-        }
-
+        listaEspera = copiaArrayList(newListaEspera);
         return res;
+	}
+	
+	private ArrayList<SolicitudReservaAnticipada> copiaArrayList (IList<SolicitudReservaAnticipada> newListaEspera){
+		ArrayList<SolicitudReservaAnticipada> res = new ArrayList<SolicitudReservaAnticipada>();
+		for(int i = 0; i<newListaEspera.size(); i++)
+			res.add(i, newListaEspera.get(i));
+		return res;
 	}
 
     public boolean existeHueco(LocalDateTime tI, LocalDateTime tF) {
         return gestorHuecos.existeHueco(tI, tF);
     }
 }
+
