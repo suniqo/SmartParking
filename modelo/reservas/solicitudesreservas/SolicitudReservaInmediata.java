@@ -65,17 +65,27 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
 
     private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
         
-        int[] vec = {0, -dist};
+        int[] orig = {iZona, jZona};
+        int[] inicio = {0, -dist};
+        int[] vecDir = {1, 1};
         
         for (int offset = 0; offset < dist; offset++) {
-            coords[dist*0 + offset] = new int[] {vec[0] + iZona, vec[1] + jZona};
-            coords[dist*1 + offset] = new int[] {-1 * vec[1] + iZona, vec[0] + jZona};
-            coords[dist*2 + offset] = new int[] {-1 * vec[0] + iZona, -1 * vec[1] + jZona};
-            coords[dist*3 + offset] = new int[] {vec[1] + iZona, -1 * vec[0] + jZona};
+            coords[dist*0 + offset] = new int[] {     inicio[0],      inicio[1]};
+            coords[dist*1 + offset] = new int[] {-1 * inicio[1],      inicio[0]};
+            coords[dist*2 + offset] = new int[] {-1 * inicio[0], -1 * inicio[1]};
+            coords[dist*3 + offset] = new int[] {     inicio[1], -1 * inicio[0]};
 
-            vec[0]++;
-            vec[1]++;
+            sumVec(inicio, vecDir);
+        }
 
+        for (int[] coord : coords) {
+            sumVec(coord, orig);
+        }
+    }
+
+    private void sumVec(int[] vecI, int[] vecDir) {
+        for (int i = 0; i < vecI.length; i++) {
+            vecI[i] += vecDir[i];
         }
     }
 
