@@ -17,7 +17,7 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         this.radio = radio;
     }
     
-    private int maximo(int x, int y) {
+    private int max(int x, int y) {
         return x > y ? x : y;
     }
 
@@ -26,7 +26,7 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         if(radio > 0 && super.esValida(gestor)) {
             int iZona = super.getIZona();
             int jZona = super.getJZona();
-            int distMax = maximo(iZona, gestor.getRadioMaxI() - iZona) + maximo(jZona, gestor.getRadioMaxJ() - jZona);
+            int distMax = max(iZona, gestor.getRadioMaxI() - iZona) + max(jZona, gestor.getRadioMaxJ() - jZona);
 
             return radio <= distMax;
         }
@@ -46,26 +46,15 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                 boolean reservado = false;
 
                 for (int dist = 1; dist <= radio && !reservado; dist++) {
+
                     int[][] coords = new int[dist * 4][2];
-
-
                     generarVecinos(coords, dist, iZona, jZona);
-                    ArrayList<int[]> coordsValidas = quitarCoordsFueraDeRango(coords, gestor);
+
+                    ArrayList<int[]> coordsValidas = new ArrayList<int[]>();
+                    quitarCoordsFueraDeRango(coordsValidas, coords, gestor);
                     ordenarPorPrecio(coordsValidas, gestor);
 
-                    Hueco hueco;
-
-                    for (int i = 0; i < coordsValidas.size() && !reservado; i++) {
-                        int[] coord = coordsValidas.get(i);
-                        GestorZona gestorZona = gestor.getGestorZona(coord[0], coord[1]);
-
-                        if ((hueco = gestorZona.reservarHueco(super.getTInicial(), super.getTFinal())) != null) {
-                            super.setGestorZona(gestorZona);
-                            super.setHueco(hueco);
-
-                            reservado = true;
-                        }
-                    }
+                    reservado = intentarReservar(coordsValidas, gestor);
                 }
             }
         }
@@ -86,15 +75,13 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
-    private ArrayList<int[]> quitarCoordsFueraDeRango(int[][] coords, GestorLocalidad gestor) {
-        ArrayList<int[]> res = new ArrayList<int[]>();
+    private void quitarCoordsFueraDeRango(ArrayList<int[]> coordsValidas, int[][] coords, GestorLocalidad gestor) {
         for (int i = 0; i < coords.length; i++) {
             int[] coord = coords[i];
             if (gestor.existeZona(coord[0], coord[1])) {
-                res.add(res.size(), coord);
+                coordsValidas.add(coordsValidas.size(), coord);
             }
         }
-        return res;
     }
 
     private void ordenarPorPrecio(ArrayList<int[]> coords, GestorLocalidad gestor) {
@@ -120,5 +107,25 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                 }
             }
         }
+    }
+
+    private boolean intentarReservar(ArrayList<int[]> coordsValidas, GestorLocalidad gestor) {
+
+        Hueco hueco;
+        boolean reservado = false;
+
+        for (int i = 0; i < coordsValidas.size() && !reservado; i++) {
+            int[] coord = coordsValidas.get(i);
+            GestorZona gestorZona = gestor.getGestorZona(coord[0], coord[1]);
+
+            if ((hueco = gestorZona.reservarHueco(super.getTInicial(), super.getTFinal())) != null) {
+                super.setGestorZona(gestorZona);
+                super.setHueco(hueco);
+
+                reservado = true;
+            }
+        }
+
+        return reservado;
     }
 }
