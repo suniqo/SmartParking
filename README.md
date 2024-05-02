@@ -74,7 +74,8 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
-En la geometría de Manhattan, donde $dist(x,x') = |i - i'| + |j - j'|$ todos los puntos a distan
+En la geometría de Manhattan $dist(\bar{x},\bar{x}') = |x - x'| + |y - y'|$, por lo todos lo que el conjunto $B_n(\bar{o}) = { (x, y): dist(\bar{o}, \bar{x}) = n}$ forma un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $B_n(\bar{o})$ será $4·dist$. Es por esto que se elige este tamaño para el array *coords*.
+Adicionalmente nótese que el número de celdas dentro del conjunto
 
 
 
