@@ -1,30 +1,4 @@
----
-header-includes:
-  - \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
----
-# Algorithm 1
-Just a sample algorithmn
-\begin{algorithm}[H]
-\DontPrintSemicolon
-\SetAlgoLined
-\KwResult{Write here the result}
-\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
-\Input{Write here the input}
-\Output{Write here the output}
-\BlankLine
-\While{While condition}{
-    instructions\;
-    \eIf{condition}{
-        instructions1\;
-        instructions2\;
-    }{
-        instructions3\;
-    }
-}
-\caption{While loop with If/Else condition}
-\end{algorithm} 
-
-# <p style="text-align:center">Documentación adicional</p>
+# Documentación adicional
 
 ## Generaración de vecinos, espacio Manhattan
 
@@ -36,14 +10,15 @@ y un radio máximo $n$, genera los vecinos a $\bar{o}$ y los ordena en sentido a
 Para realizar la reserva, el proceso que seguimos es:
 
 
->**for**  $dist \in \lbrack 1, \dots, n \rbrack :$
+> **for**  $dist \in \lbrack 1, \dots, n \rbrack :$
 >
->- generarVecinos(radio = $dist$)
->- quitarVecinosFueraDeRango()
->- ordenarPorPrecio()
->- intentarReservarEnOrden()
+> - generarVecinos(radio = $dist$)
+> - quitarVecinosFueraDeRango()
+> - ordenarPorPrecio()
+> - intentarReservarEnOrden()
 >
->&nbsp;&nbsp;&nbsp;&nbsp;**if** reservaExitosa(): break
+> &nbsp;&nbsp;&nbsp;&nbsp;**if** reservaExitosa():
+> - break
 
 
 ### Funcionamiento
