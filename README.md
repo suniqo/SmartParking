@@ -10,14 +10,14 @@ y un radio máximo $n$, genera los vecinos a $\bar{o}$ y los ordena en sentido a
 Para realizar la reserva, el proceso que seguimos es:
 
 
-**for** $dist \in {1, \dots, n}:$
+**for** $dist \in \{1, \dots, n\}:$
 
 - generarVecinos($radio = dist$)
 - quitarVecinosFueraDeRango()
 - ordenarPorPrecio()
 - intentarReservarEnOrden()
 
-&nbsp;&nbsp;&nbsp;&nbsp;**if** reservaExitosa(): acabar
+&nbsp;&nbsp;&nbsp;&nbsp;**if** reservaExitosa(): break
 
 
 
