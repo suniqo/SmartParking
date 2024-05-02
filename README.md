@@ -21,8 +21,14 @@ while not reservado and dist < n:
     reservado = intentarReservarEnOrden()
     dist++
 ```
+
+De este modo, en cada iteración $i$, generamos los vecinos con $dist = i \in \lbrack 1, \dots, n \rbrack :$ en orden antihorario.
+Tras eliminar aquellos fuera de rango y reordenarlos por precio, intentamos reservar en cada uno de los vecinos ordenadamente.
+Si se logra reservar, se sale del bucle; en otro caso se repite el proceso con $dist = i + 1$.
+El proceso acabará si se logra reservar en cualquiera de las iteraciones, o si no se logra reservar en ningún vecino con $dist <= n$.
+
 > **while** not reservado
-> $dist \in \lbrack 1, \dots, n \rbrack :$
+> 
 >
 > - generarVecinos(radio = $dist$)
 > - quitarVecinosFueraDeRango()
