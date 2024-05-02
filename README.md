@@ -1,4 +1,4 @@
-# <center>Documentación adicional<\center>
+# <center>Documentación adicional</center>
 
 
 ## Generaración de vecinos, espacio Manhattan
