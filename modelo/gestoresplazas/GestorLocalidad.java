@@ -42,6 +42,6 @@ public class GestorLocalidad {
 	}
 	
 	public IList<SolicitudReservaAnticipada> getSolicitudesAtendidasListaEspera(int i, int j) {
-		return gestoresZonas[i][j].getSolicitudesAtendidasListaEspera();
+		return existeZona(i, j) ? gestoresZonas[i][j].getSolicitudesAtendidasListaEspera() : null;
 	}
 }

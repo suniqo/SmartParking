@@ -102,7 +102,7 @@ Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer u
 
 #### Función generarVecinos
 
-De todas las funciones auxiliares, tan solo se comentará ***generarVecinos()*** ya que el resto son bastante triviales, y no hay mucho contenido que explicar. La función, que a su vez tiene otra función auxiliar, es del siguiente modo:
+De todas las funciones auxiliares, tan solo se comentará ***generarVecinos()*** ya que el resto son bastante triviales, y no hay mucho contenido que explicar. La función es la siguiente:
 
 ```java
 private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
@@ -118,15 +118,9 @@ private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
         coords[dist*2 + offset] = new int[] {-1 * inicio[0] + orig[0], -1 * inicio[1] + orig[1]};
         coords[dist*3 + offset] = new int[] {     inicio[1] + orig[0], -1 * inicio[0] + orig[1]};
 
-        sumaVec(inicio, vecDir);
+        inicio[0] += vecDir[0];
+        inicio[1] += vecDir[1];
     }
 }
-
-private void sumaVec(int[] vecI, int[] vecDir) {
-    for (int i = 0; i < vecI.length; i++) {
-        vecI[i] += vecDir[i];
-    }
-}
-
 ```
 

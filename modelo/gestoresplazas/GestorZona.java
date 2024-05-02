@@ -108,7 +108,7 @@ public class GestorZona {
                 res.add(res.size(), solicitud);
                 solicitud.setHueco(hueco);
             }else
-                newListaEspera.add(newListaEspera.size(), listaEspera.get(i));
+                newListaEspera.add(newListaEspera.size(), solicitud);
         }
         listaEspera = copiaArrayList(newListaEspera);
         return res;

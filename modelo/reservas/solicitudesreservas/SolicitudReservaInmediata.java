@@ -89,13 +89,8 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
             coords[dist*2 + offset] = new int[] {-1 * inicio[0] + orig[0], -1 * inicio[1] + orig[1]};
             coords[dist*3 + offset] = new int[] {     inicio[1] + orig[0], -1 * inicio[0] + orig[1]};
 
-            sumaVec(inicio, vecDir);
-        }
-    }
-
-    private void sumaVec(int[] vecI, int[] vecDir) {
-        for (int i = 0; i < vecI.length; i++) {
-            vecI[i] += vecDir[i];
+            inicio[0] += vecDir[0];
+            inicio[1] += vecDir[1];
         }
     }
 

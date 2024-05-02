@@ -46,8 +46,6 @@ public class ControladorReservas {
 		return reserva.getEstadoValidez() == EstadoValidez.OK;
 	}
 
-	//TO-DO alumno obligatorio
-
 	public ControladorReservas(int[][] plazas, double[][] precios) {
         gestorLocalidad = new GestorLocalidad(plazas, precios);
         registroReservas = new Reservas();
@@ -82,8 +80,6 @@ public class ControladorReservas {
 	}
 
 
-	//TO-DO alumno opcional
-
 	public void desocuparPlaza(int numReserva) {
         Reserva reserva = registroReservas.obtenerReserva(numReserva);
         Hueco hueco = reserva.getHueco();
@@ -100,7 +96,9 @@ public class ControladorReservas {
 		
 	// PRE (no es necesario comprobar): todas las solicitudes atendidas son válidas.
 	public IList<Integer> getReservasRegistradasDesdeListaEspera(int i, int j){
-        IList<SolicitudReservaAnticipada> solicitudesAtendidas = gestorLocalidad.getGestorZona(i, j).getSolicitudesAtendidasListaEspera();
+        IList<SolicitudReservaAnticipada> solicitudesAtendidas = gestorLocalidad.getSolicitudesAtendidasListaEspera(i, j);
+        if (solicitudesAtendidas == null) return null;
+
         IList<Integer> res = new ArrayList<Integer>();
 
         for (int k = 0; k < solicitudesAtendidas.size(); k++) {
