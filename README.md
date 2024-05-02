@@ -126,6 +126,8 @@ private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
 ```
 Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 ). De este modo, sea $dist = n$ la distancia dada, si conocemos una coordenada en la posición i < n, podemos determinar las que se encuentran en las posiciones n + i, 2*n + i y 3*n + i.
 
+![image info](./assets/table-vec.png)
+
 Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las 4*n celdas a una distacia n, comenzando en la esquina izquierda y avanzando según la dirección de vecDir, hasta recorrer n celdas (1/4 de todas), y con ellas generamos el resto de forma que estén en orden antihorario.
 
 Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando {iZona, jZona}.
