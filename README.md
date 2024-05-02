@@ -30,6 +30,36 @@ La ejecución finaliza si o bien se logra reservar en cualquiera de las iteracio
 
 ### Funcionamiento
 
+La función principal es la siguiente:
+```java
+
+    @Override
+    public void gestionarSolicitudReserva(GestorLocalidad gestor) {
+        if (esValida(gestor)) {
+    
+            super.gestionarSolicitudReserva(gestor);
+
+            if (super.getHueco() == null) {
+
+                boolean reservado = false;
+
+                for (int dist = 1; dist <= radio && !reservado; dist++) {
+
+                    int[][] coords = new int[dist * 4][2];
+                    generarVecinos(coords, dist, super.getIZona(), super.getJZona());
+
+                    ArrayList<int[]> coordsValidas = new ArrayList<int[]>();
+                    quitarCoordsFueraDeRango(coordsValidas, coords, gestor);
+                    ordenarPorPrecio(coordsValidas, gestor);
+
+                    reservado = intentarReservar(coordsValidas, gestor);
+                }
+            }
+        }
+    }
+
+```
+
 
 
 ### Implementación
