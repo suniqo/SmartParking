@@ -60,7 +60,7 @@ La función principal es la siguiente:
 
 ```
 
-Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un *array* bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$. A continuación se llama a ***generarVecinos()*** que rellena a **coords** de estos vecinos, colocándolos en orden antihorario.
+Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un *array* bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$. A continuación se llama a ***generarVecinos()*** que rellena el *array* **coords** de estos vecinos, colocándolos en orden antihorario.
 
 ```java
 for (int dist = 1; dist <= radio && !reservado; dist++) {
@@ -124,4 +124,10 @@ private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
     }
 }
 ```
+Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 ). De este modo, sea $dist = n$ la distancia dada, si conocemos una coordenada en la posición i < n, podemos determinar las que se encuentran en las posiciones n + i, 2*n + i y 3*n + i.
 
+Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las 4*n celdas a una distacia n, comenzando en la esquina izquierda y avanzando según la dirección de vecDir, hasta recorrer n celdas (1/4 de todas), y con ellas generamos el resto de forma que estén en orden antihorario.
+
+Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando {iZona, jZona}.
+Luego, sean n el número de coordenadas a una distacia dada, nuestro algoritmo
+tiene una complejidad O(n), es decir, tiene una complejidad lineal.
