@@ -1,4 +1,8 @@
+<p align="center">
+
 # Documentación adicional
+
+</p>
 
 ## Generaración de vecinos, espacio Manhattan
 
