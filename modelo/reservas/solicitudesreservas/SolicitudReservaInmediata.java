@@ -1,12 +1,23 @@
 package modelo.reservas.solicitudesreservas;
 
 import java.time.LocalDateTime;
+
+import anotacion.Programacion2;
 import list.ArrayList;
 
 import modelo.gestoresplazas.GestorLocalidad;
 import modelo.gestoresplazas.GestorZona;
 import modelo.gestoresplazas.huecos.Hueco;
 import modelo.vehiculos.Vehiculo;
+
+@Programacion2 (
+		nombreAutor1 = "Andrés",
+		apellidoAutor1 = "Súnico Sánchez",
+		emailUPMAutor1 = "andres.sunico",
+		nombreAutor2 = "Samuel",
+		apellidoAutor2 = "Álvarez Salido",
+		emailUPMAutor2 = "samuel.alvarez"
+		)
 
 public class SolicitudReservaInmediata extends SolicitudReserva {
     
@@ -52,7 +63,7 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
                     generarVecinos(coords, dist, super.getIZona(), super.getJZona());
 
                     ArrayList<int[]> coordsValidas = new ArrayList<int[]>();
-                    quitarCoordsFueraDeRango(coordsValidas, coords, gestor);
+                    anadirCoordsValidas(coordsValidas, coords, gestor);
                     ordenarPorPrecio(coordsValidas, gestor);
 
                     reservado = intentarReservar(coordsValidas, gestor);
@@ -95,7 +106,7 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
     }
 
     // Se añaden a un ArrayList las coords válidas ya que no se conoce de antemano cuantas habrá que eliminar.
-    private void quitarCoordsFueraDeRango(ArrayList<int[]> coordsValidas, int[][] coords, GestorLocalidad gestor) {
+    private void anadirCoordsValidas(ArrayList<int[]> coordsValidas, int[][] coords, GestorLocalidad gestor) {
         for (int[] coord: coords) {
             if (gestor.existeZona(coord[0], coord[1])) {
                 coordsValidas.add(coordsValidas.size(), coord);
