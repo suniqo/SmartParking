@@ -12,15 +12,15 @@ Para realizar la reserva, el proceso que seguimos en pseudocódigo es:
 
 ``` python
 Input: radioMax = n, o = [i, j]  
-Init: reservado = False, dist = 1
+Init: reservado <- False, dist <- 1
 
 while not reservado and dist < n:
     generarVecinos(radio = dist, origen = [i, j])
     quitarVecinosFueraDeRango()
     ordenarPorPrecio()
 
-    reservado = intentarReservarEnOrden()
-    dist++
+    reservado <- intentarReservarEnOrden()
+    dist <- dist + 1
 ```
 
 De este modo, en cada iteración $i$, generamos los vecinos con $dist = i \in \lbrack 1, \dots, n \rbrack$ en orden antihorario.
