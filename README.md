@@ -7,7 +7,7 @@ y un radio máximo $n$, genera los vecinos a $\bar{o}$ y los ordena en sentido a
 
 ### Overview
 
-Para realizar la reserva, el proceso que seguimos es:
+Para realizar la reserva, el proceso que seguimos en pseudocódigo es:
 
 ``` python
 Input: radioMax = n, o = [i, j]  
