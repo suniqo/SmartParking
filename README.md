@@ -27,16 +27,6 @@ Tras eliminar aquellos fuera de rango y reordenarlos por precio, intentamos rese
 Si se logra reservar, se sale del bucle; en otro caso se repite el proceso con $dist = i + 1$.
 La ejecución finaliza si o bien se logra reservar en cualquiera de las iteraciones, o bien si no se logra reservar en ningún vecino con $dist <= n$.
 
-> **while** not reservado
-> 
->
-> - generarVecinos(radio = $dist$)
-> - quitarVecinosFueraDeRango()
->
-> &nbsp;&nbsp;&nbsp;&nbsp;**if** reservaExitosa():
-> - break
-
-
 ### Funcionamiento
 
 ### Implementación
