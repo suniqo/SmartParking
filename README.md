@@ -60,7 +60,7 @@ La función principal es la siguiente:
 
 ```
 
-Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada, se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un array bidimensional de tamaño $4·dist \times 2$.
+Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada, se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un array bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$.
 
 ```java
 for (int dist = 1; dist <= radio && !reservado; dist++) {
@@ -68,7 +68,7 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
     int[][] coords = new int[dist * 4][2];
     generarVecinos(coords, dist, super.getIZona(), super.getJZona());
 
-    (...)
+    ...
 
 }
 
