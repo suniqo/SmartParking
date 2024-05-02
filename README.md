@@ -1,4 +1,4 @@
-# Documentación adicional
+# <p style="text-align:center">Documentación adicional</p>
 
 ## Generaración de vecinos, espacio Manhattan
 
@@ -9,19 +9,17 @@ y un radio máximo $n$, genera los vecinos a $\bar{o}$ y los ordena en sentido a
 
 Para realizar la reserva, el proceso que seguimos es:
 
-```
-**for** $dist \in {1, \dots, n}:$
 
-generarVecinos($radio = dist$)
-quitarVecinosFueraDeRango()
-ordenarPorPrecio()
-intentarReservarEnOrden()
+>**for** $dist \in {1, \dots, n}:$
+>&nbsp;&nbsp;generarVecinos($radio = dist$)
+>&nbsp;&nbsp;quitarVecinosFueraDeRango()
+>&nbsp;&nbsp;ordenarPorPrecio()
+>&nbsp;&nbsp;intentarReservarEnOrden()
+>&nbsp;&nbsp;**if** reservaExitosa:
+>&nbsp;&nbsp;&nbsp;&nbsp;break
+>&nbsp;&nbsp;**else**
+>&nbsp;&nbsp;&nbsp;&nbsp;continue  
 
-**if** reservaExitosa:
-break
-**else**
-continue  
-```
 
 
 ### Funcionamiento
