@@ -74,13 +74,13 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
-En la geometría de Manhattan $dist(\bar{v},\bar{v}') = |x - x'| + |y - y'|$, por lo que todos los puntos del conjunto $B_n(\bar{o}) = \lbrace (x, y): dist(\bar{o}, \bar{x}) = n\rbrace$ forman un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $B_n(\bar{o})$, será $4·n$, es decir, que la circunferencia de un círculo de radio $n$ será $4·n$. Es por esto que se elige este tamaño para el *array* **coords**.
+En la geometría de Manhattan $dist(\bar{v},\bar{v}') = |x - x'| + |y - y'|$, por lo que todos los puntos del conjunto $C_n(\bar{o}) = \lbrace (x, y): dist(\bar{o}, \bar{x}) = n\rbrace$ forman un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $B_n(\bar{o})$, será $4·n$, es decir, que la circunferencia de un círculo de radio $n$ será $4·n$. Es por esto que se elige este tamaño para el *array* **coords**.
 
 ![image info](./assets/taxicab-ball.png)
 
-Adicionalmente nótese que el número de celdas dentro del conjunto $\overline{B_n}(\bar{o}) = \lbrace(x, y): dist(\bar{o}, \bar{x}) \leq n\rbrace$, por lo discutido, será: $$4·1 + 4·2 + \dots + 4·n = 4·\displaystyle\sum_{i=1}^{n} i = 4·\frac{n·(n + 1)}{2} = 2·n·(n + 1)$$
+Adicionalmente nótese que el número de celdas dentro del conjunto $\overline{B_n}(\bar{o}) = \lbrace(x, y): dist(\bar{o}, \bar{x}) \leq n\rbrace$, por lo discutido, será: $$1 + 4·1 + 4·2 + \dots + 4·n = 1 + 4·\displaystyle\sum_{i=1}^{n} i = 1 + 4·\frac{n·(n + 1)}{2} = 2·n·(n + 1) + 1$$
 
-Es conclusión, en este espacio un círculo de radio $n$ tendrá una circunferencia de $4·n$, y un área de $2·n·(n + 1)$.
+Es conclusión, en este espacio un círculo de radio $n$ tendrá una circunferencia de $4·n$, y un área de $2·n·(n + 1) + 1$.
 
 ```java
 for (int dist = 1; dist <= radio && !reservado; dist++) {
