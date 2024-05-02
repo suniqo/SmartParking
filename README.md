@@ -9,13 +9,23 @@ y un radio máximo $n$, genera los vecinos a $\bar{o}$ y los ordena en sentido a
 
 Para realizar la reserva, el proceso que seguimos es:
 
+``` python
+Input: radioMax, o = [i, j]  
+Init: reservado = False, dist = 1
 
-> **for**  $dist \in \lbrack 1, \dots, n \rbrack :$
+while not reservado and dist < n:
+    generarVecinos(radio = dist, origen = o)
+    quitarVecinosFueraDeRango()
+    ordenarPorPrecio()
+
+    reservado = intentarReservarEnOrden()
+    dist++
+```
+> **while** not reservado
+> $dist \in \lbrack 1, \dots, n \rbrack :$
 >
 > - generarVecinos(radio = $dist$)
 > - quitarVecinosFueraDeRango()
-> - ordenarPorPrecio()
-> - intentarReservarEnOrden()
 >
 > &nbsp;&nbsp;&nbsp;&nbsp;**if** reservaExitosa():
 > - break
