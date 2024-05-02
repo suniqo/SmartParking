@@ -40,15 +40,16 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
             super.gestionarSolicitudReserva(gestor);
 
             if (super.getHueco() == null) {
-                int iZona = super.getIZona();
-                int jZona = super.getJZona();
 
                 boolean reservado = false;
 
                 for (int dist = 1; dist <= radio && !reservado; dist++) {
 
+                    // En cada iteración se generan los vecinos a la distacia determinada por el bucle,
+                    // y se añaden a un array en orden antihorario, cada una almacenada en forma {i, j}.
+                    // El tamaño es dist * 4, ya que a distancia 1 hay 4 celdas, a 2: 8, a 3: 12, etc.
                     int[][] coords = new int[dist * 4][2];
-                    generarVecinos(coords, dist, iZona, jZona);
+                    generarVecinos(coords, dist, super.getIZona(), super.getJZona());
 
                     ArrayList<int[]> coordsValidas = new ArrayList<int[]>();
                     quitarCoordsFueraDeRango(coordsValidas, coords, gestor);
@@ -63,32 +64,42 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
 
     /*** Métodos Auxiliares ***/
 
+    // Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos
+    // la simetría de las coordenadas cuando el centro es el origen {0, 0}.
+    // De este modo, sea n la distancia dada, si conocemos una coordenada
+    // en la posición i < n, podemos determinar las que se encuentran en las
+    // posiciones n + i, 2*n + i y 3*n + i.
+    // Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado
+    // que forman las 4*n celdas a una distacia n, comenzando en la esquina izquierda
+    // y avanzando según la dirección de vecDir, hasta recorrer n celdas (1/4 de todas),
+    // y con ellas generamos el resto de forma que estén en orden antihorario.
+    // Una vez se tienen los vecinos con origen enn el {0, 0}, se trasladan sumando {iZona, jZona}.
+    // Luego, sean n el número de coordenadas a una distacia dada, nuestro algoritmo
+    // tiene una complejidad O(n), es decir, tiene una complejidad lineal.
     private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
         
-        int[] orig = {iZona, jZona};
         int[] inicio = {0, -dist};
         int[] vecDir = {1, 1};
+
+        int[] orig = {iZona, jZona};
         
         for (int offset = 0; offset < dist; offset++) {
-            coords[dist*0 + offset] = new int[] {     inicio[0],      inicio[1]};
-            coords[dist*1 + offset] = new int[] {-1 * inicio[1],      inicio[0]};
-            coords[dist*2 + offset] = new int[] {-1 * inicio[0], -1 * inicio[1]};
-            coords[dist*3 + offset] = new int[] {     inicio[1], -1 * inicio[0]};
+            coords[dist*0 + offset] = new int[] {     inicio[0] + orig[0],      inicio[1] + orig[1]};
+            coords[dist*1 + offset] = new int[] {-1 * inicio[1] + orig[0],      inicio[0] + orig[1]};
+            coords[dist*2 + offset] = new int[] {-1 * inicio[0] + orig[0], -1 * inicio[1] + orig[1]};
+            coords[dist*3 + offset] = new int[] {     inicio[1] + orig[0], -1 * inicio[0] + orig[1]};
 
-            sumVec(inicio, vecDir);
-        }
-
-        for (int[] coord : coords) {
-            sumVec(coord, orig);
+            sumaVec(inicio, vecDir);
         }
     }
 
-    private void sumVec(int[] vecI, int[] vecDir) {
+    private void sumaVec(int[] vecI, int[] vecDir) {
         for (int i = 0; i < vecI.length; i++) {
             vecI[i] += vecDir[i];
         }
     }
 
+    // Se añaden a un ArrayList las coords válidas ya que no se conoce de antemano cuantas habrá que eliminar.
     private void quitarCoordsFueraDeRango(ArrayList<int[]> coordsValidas, int[][] coords, GestorLocalidad gestor) {
         for (int[] coord: coords) {
             if (gestor.existeZona(coord[0], coord[1])) {
@@ -97,6 +108,10 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
+    // Utilizamos un BubbleSort simple para ordenar las coordenadas válidas del ArrayList
+    // según el precio de su gestor de zona correspondiente.
+    // Como las coordenadas ya están en orden antihorario, si dos tienen el mismo precio
+    // quedarán ordenadas de forma correcta, ya que el algoritmo no alterará su orden.
     private void ordenarPorPrecio(ArrayList<int[]> coords, GestorLocalidad gestor) {
         int length = coords.size();
 
@@ -122,6 +137,7 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
+    //Si en algún momento se logra reservar, se escapa del bucle ya que el proceso ha finalizado.
     private boolean intentarReservar(ArrayList<int[]> coordsValidas, GestorLocalidad gestor) {
 
         Hueco hueco;
