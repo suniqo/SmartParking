@@ -60,7 +60,7 @@ La función principal es la siguiente:
 
 ```
 
-Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un array bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$.
+Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un *array* bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$.
 
 ```java
 for (int dist = 1; dist <= radio && !reservado; dist++) {
@@ -74,10 +74,27 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
-En la geometría de Manhattan $dist(\bar{x},\bar{x}') = |x - x'| + |y - y'|$, por lo todos lo que todos los puntos del conjunto $B_n(\bar{o}) = \lbrace (x, y): dist(\bar{o}, \bar{x}) = n\rbrace$ forman un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $B_n(\bar{o})$ será $4·n$. Es por esto que se elige este tamaño para el array *coords*.
+En la geometría de Manhattan $dist(\bar{x},\bar{x}') = |x - x'| + |y - y'|$, por lo todos lo que todos los puntos del conjunto $B_n(\bar{o}) = \lbrace (x, y): dist(\bar{o}, \bar{x}) = n\rbrace$ forman un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $B_n(\bar{o})$ será $4·n$. Es por esto que se elige este tamaño para el array **coords**.
 
 Adicionalmente nótese que el número de celdas dentro del conjunto $\overline{B_n}(\bar{o}) = \lbrace(x, y): dist(\bar{o}, \bar{x}) \leq n\rbrace$, por lo discutido, será: $$4·1 + 4·2 + \dots + 4·n = 4·\displaystyle\sum_{i=1}^{n} i = 4·\frac{n(n + 1)}{2} = 2·n·(n + 1) = 2n^2 + 2n$$
 
+```java
+for (int dist = 1; dist <= radio && !reservado; dist++) {
 
+    ...
+
+    ArrayList<int[]> coordsValidas = new ArrayList<int[]>();
+    quitarCoordsFueraDeRango(coordsValidas, coords, gestor);
+    ordenarPorPrecio(coordsValidas, gestor);   //BubbleSort
+
+    reservado = intentarReservar(coordsValidas, gestor);
+}
+
+```
+
+Después de generar los vecinos, se añaden al *ArrayList* **coordsValidas** aquellas coordenadas que existan en el *GestorLocalidad* **gestor** en el método ***quitarCoordsFueraDeRango*** y se ordenan utilizando un BubbleSort en ***ordenarPorPrecio***.
+Como las coordenadas de **cords** se colocan en el *array* en orden antihorario y se colocan en el *ArrayList* del mismo modo, al ordenarlos en el BubbleSort, como solo se intercambian dos elementos si uno tiene mayor precio que el siguiente, si dos coordenadas tienen el mismo precio se quedarán ordenadas en sentido antihorario.
+
+Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en cada auna de forma ordenada en ***intentarReserva()*** hasta que se tenga éxito o se fracase con todas las coordenadas con $dist \leq n$, como se comentó previamente.
 
 ### Implementación
