@@ -98,3 +98,6 @@ Como las coordenadas de **cords** se colocan en el *array* en orden antihorario 
 Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en cada auna de forma ordenada en ***intentarReserva()*** hasta que se tenga éxito o se fracase con todas las coordenadas con $dist \leq n$, como se comentó previamente.
 
 #### Función generarVecinos
+
+De todas las funciones auxiliares, tan solo se comentará ***generarVecinos*** ya que el resto son bastante triviales, y no hay mucho contenido que explicar.
+
