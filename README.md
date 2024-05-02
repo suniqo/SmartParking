@@ -1,4 +1,5 @@
-<p align="center"> # Documentación adicional </p>
+
+<h1 align="center"> Documentación adicional </h1>
 
 ## Generaración de vecinos, espacio Manhattan
 
