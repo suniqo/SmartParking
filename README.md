@@ -131,3 +131,10 @@ Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadra
 Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando {iZona, jZona}.
 Luego, sean n el número de coordenadas a una distacia dada, nuestro algoritmo
 tiene una complejidad O(n), es decir, tiene una complejidad lineal.
+
+
+| (-2,-2) | (-2,-1) | (-2,0) | (-2,1) | (-2,2) |
+| (-1,-2) | (-1,-1) | (-1,0) | (-1,1) | (-1,2) |
+|  (0,-2) |  (0,-1) |  (0,0) |  (0,1) |  (0,2) |
+|  (1,-2) |  (1,-1) |  (1,0) |  (1,1) |  (1,2) |
+|  (2,-2) |  (2,-1) |  (2,0) |  (2,1) |  (2,2) |
