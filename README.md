@@ -10,7 +10,7 @@ y un radio máximo $n$, genera los vecinos a $\bar{o}$ y los ordena en sentido a
 Para realizar la reserva, el proceso que seguimos es:
 
 
-**for** $dist \{ 1, \dots, n \} :$
+**for** $dist \in \lbrack 1, \dots, n \rbrack :$
 
 - generarVecinos(radio = $dist$)
 - quitarVecinosFueraDeRango()
