@@ -49,7 +49,7 @@ La función principal es la siguiente:
                     generarVecinos(coords, dist, super.getIZona(), super.getJZona());
 
                     ArrayList<int[]> coordsValidas = new ArrayList<int[]>();
-                    quitarCoordsFueraDeRango(coordsValidas, coords, gestor);
+                    anadirCoordsValidas(coordsValidas, coords, gestor);
                     ordenarPorPrecio(coordsValidas, gestor);
 
                     reservado = intentarReservar(coordsValidas, gestor);
@@ -88,7 +88,7 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
     ...
 
     ArrayList<int[]> coordsValidas = new ArrayList<int[]>();
-    quitarCoordsFueraDeRango(coordsValidas, coords, gestor);
+    anadirCoordsValidas(coordsValidas, coords, gestor);
     ordenarPorPrecio(coordsValidas, gestor);   //BubbleSort
 
     reservado = intentarReservar(coordsValidas, gestor);
@@ -96,10 +96,10 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
-Después de generar los vecinos, se añaden al *ArrayList* **coordsValidas** aquellas coordenadas que existan en el *GestorLocalidad* **gestor** en el método ***quitarCoordsFueraDeRango*** y se ordenan utilizando un BubbleSort en ***ordenarPorPrecio()***.
+Después de generar los vecinos, se añaden al *ArrayList* **coordsValidas** aquellas coordenadas que existan en el *GestorLocalidad* **gestor** en el método ***anadirCoordsValidas*** y se ordenan utilizando un BubbleSort en ***ordenarPorPrecio()***.
 Como las coordenadas de **cords** se colocan en el *array* en orden antihorario y se colocan en el *ArrayList* del mismo modo, al ordenarlos en el BubbleSort, como solo se intercambian dos elementos si uno tiene mayor precio que el siguiente, si dos coordenadas tienen el mismo precio se quedarán ordenadas en sentido antihorario.
 
-Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en cada auna de forma ordenada en ***intentarReserva()*** hasta que se tenga éxito o se fracase con todas las coordenadas con $dist \leq n$, como se comentó previamente.
+Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en cada una de forma ordenada en ***intentarReserva()*** hasta que se tenga éxito o se fracase con todas las coordenadas con $dist \leq n$, como se comentó previamente.
 
 #### Función generarVecinos
 
