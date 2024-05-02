@@ -28,7 +28,7 @@ Tras eliminar aquellos fuera de rango y reordenarlos por precio, intentamos rese
 Si se logra reservar, se sale del bucle; en otro caso se repite el proceso con $dist = i + 1$.
 La ejecución finaliza si o bien se logra reservar en cualquiera de las iteraciones, o bien no se logra reservar en ningún vecino con $dist \leq n$.
 
-### Funcionamiento
+### Desarrollo del método
 
 La función principal es la siguiente:
 ```java
@@ -97,4 +97,4 @@ Como las coordenadas de **cords** se colocan en el *array* en orden antihorario 
 
 Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en cada auna de forma ordenada en ***intentarReserva()*** hasta que se tenga éxito o se fracase con todas las coordenadas con $dist \leq n$, como se comentó previamente.
 
-### Implementación
+#### Función generarVecinos
