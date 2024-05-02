@@ -60,7 +60,7 @@ La función principal es la siguiente:
 
 ```
 
-Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un *array* bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$. A continuación se llama a ***generarVecinos*** que rellena a **coords** de estos vecinos, colocándolos en orden antihorario.
+Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un *array* bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$. A continuación se llama a ***generarVecinos()*** que rellena a **coords** de estos vecinos, colocándolos en orden antihorario.
 
 ```java
 for (int dist = 1; dist <= radio && !reservado; dist++) {
@@ -92,14 +92,14 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
-Después de generar los vecinos, se añaden al *ArrayList* **coordsValidas** aquellas coordenadas que existan en el *GestorLocalidad* **gestor** en el método ***quitarCoordsFueraDeRango*** y se ordenan utilizando un BubbleSort en ***ordenarPorPrecio***.
+Después de generar los vecinos, se añaden al *ArrayList* **coordsValidas** aquellas coordenadas que existan en el *GestorLocalidad* **gestor** en el método ***quitarCoordsFueraDeRango*** y se ordenan utilizando un BubbleSort en ***ordenarPorPrecio()***.
 Como las coordenadas de **cords** se colocan en el *array* en orden antihorario y se colocan en el *ArrayList* del mismo modo, al ordenarlos en el BubbleSort, como solo se intercambian dos elementos si uno tiene mayor precio que el siguiente, si dos coordenadas tienen el mismo precio se quedarán ordenadas en sentido antihorario.
 
 Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en cada auna de forma ordenada en ***intentarReserva()*** hasta que se tenga éxito o se fracase con todas las coordenadas con $dist \leq n$, como se comentó previamente.
 
 #### Función generarVecinos
 
-De todas las funciones auxiliares, tan solo se comentará ***generarVecinos*** ya que el resto son bastante triviales, y no hay mucho contenido que explicar. La función es del siguiente modo:
+De todas las funciones auxiliares, tan solo se comentará ***generarVecinos()*** ya que el resto son bastante triviales, y no hay mucho contenido que explicar. La función, que a su vez tiene otra función auxiliar, es del siguiente modo:
 
 ```java
 private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
