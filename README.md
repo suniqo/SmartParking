@@ -1,3 +1,8 @@
+---
+header-includes:
+  - \usepackage{algorithm2e}
+---
+
 # <p style="text-align:center">Documentación adicional</p>
 
 ## Generaración de vecinos, espacio Manhattan
@@ -19,6 +24,18 @@ Para realizar la reserva, el proceso que seguimos es:
 >
 >&nbsp;&nbsp;&nbsp;&nbsp;**if** reservaExitosa(): break
 
+\BlankLine
+\While{While condition}{
+    instructions\;
+    \eIf{condition}{
+        instructions1\;
+        instructions2\;
+    }{
+        instructions3\;
+    }
+}
+\caption{While loop with If/Else condition}
+\end{algorithm}
 
 
 ### Funcionamiento
