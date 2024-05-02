@@ -26,7 +26,7 @@ while not reservado and dist <= n:
 De este modo, en cada iteración $i$, generamos los vecinos con $dist = i \in \lbrack 1, \dots, n \rbrack$ en orden antihorario.
 Tras eliminar aquellos fuera de rango y reordenarlos por precio, intentamos reservar en cada uno de los vecinos ordenadamente.
 Si se logra reservar, se sale del bucle; en otro caso se repite el proceso con $dist = i + 1$.
-La ejecución finaliza si o bien se logra reservar en cualquiera de las iteraciones, o bien no se logra reservar en ningún vecino con $dist <= n$.
+La ejecución finaliza si o bien se logra reservar en cualquiera de las iteraciones, o bien no se logra reservar en ningún vecino con $dist \leq n$.
 
 ### Funcionamiento
 
@@ -74,10 +74,9 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
-En la geometría de Manhattan $dist(\bar{x},\bar{x}') = |x - x'| + |y - y'|$, por lo todos lo que todos los puntos del conjunto $B_n(\bar{o}) = { (x, y): dist(\bar{o}, \bar{x}) = n}$ forman un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $B_n(\bar{o})$ será $4·n$.\
-Es por esto que se elige este tamaño para el array *coords*.
+En la geometría de Manhattan $dist(\bar{x},\bar{x}') = |x - x'| + |y - y'|$, por lo todos lo que todos los puntos del conjunto $B_n(\bar{o}) = { (x, y): dist(\bar{o}, \bar{x}) = n}$ forman un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $B_n(\bar{o})$ será $4·n$. Es por esto que se elige este tamaño para el array *coords*.
 
-Adicionalmente nótese que el número de celdas dentro del conjunto $\overline{B_n}(\bar{o}) = { (x, y): dist(\bar{o}, \bar{x}) <= n}$, por lo discutido, será: $$4·1 + 4·2 + \dots + 4·n = 4·\displaystyle\sum_{i=1}^{n} i = 4·\frac{n(n + 1)}{2} = 2·n·(n + 1) = 2n^2 + 2n$$
+Adicionalmente nótese que el número de celdas dentro del conjunto $\overline{B_n}(\bar{o}) = \{\,(x, y): dist(\bar{o}, \bar{x}) \leq n,\}$, por lo discutido, será: $$4·1 + 4·2 + \dots + 4·n = 4·\displaystyle\sum_{i=1}^{n} i = 4·\frac{n(n + 1)}{2} = 2·n·(n + 1) = 2n^2 + 2n$$
 
 
 
