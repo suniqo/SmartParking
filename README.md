@@ -60,6 +60,16 @@ La función principal es la siguiente:
 
 ```
 
+Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada, se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal:
+
+```java
+                for (int dist = 1; dist <= radio && !reservado; dist++) {
+                    ...
+                }
+
+```
+
+
 
 
 ### Implementación
