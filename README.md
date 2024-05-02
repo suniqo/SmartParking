@@ -64,7 +64,12 @@ Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zon
 
 ```java
 for (int dist = 1; dist <= radio && !reservado; dist++) {
-    ...
+
+    int[][] coords = new int[dist * 4][2];
+    generarVecinos(coords, dist, super.getIZona(), super.getJZona());
+
+    (...)
+
 }
 
 ```
