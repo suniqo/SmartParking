@@ -74,6 +74,7 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
+En la geometría de Manhattan, donde $dist(x,x') = |i - i'| + |j - j'|$ todos los puntos a distan
 
 
 
