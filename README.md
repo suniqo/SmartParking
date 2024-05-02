@@ -3,7 +3,7 @@
 ## Algoritmo Vecinos Manhattan
 
 En este apartado nos gustaría dar información adicional sobre el algoritmo que utilizamos en la clase
-reservaInmediata, que dados la coordenada $( i, j )$ como origen y un radio máximo $n$ , genera los vecinos a (i, j)
+reservaInmediata, que dados el origen $\bar{o} = ( i, j )$ y un radio máximo $n$ , genera los vecinos a (i, j)
 y los ordenada en sentido antihorario y de menor a mayor distacia, en el espacio métrico del taxista.
 
 **The Cauchy-Schwarz Inequality**
