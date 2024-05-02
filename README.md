@@ -17,10 +17,8 @@ Para realizar la reserva, el proceso que seguimos es:
 - ordenarPorPrecio()
 - intentarReservarEnOrden()
 
-&nbsp;&nbsp;**if** reservaExitosa:
-&nbsp;&nbsp; - break
-&nbsp;&nbsp;**else**
-&nbsp;&nbsp; - continue  
+&nbsp;&nbsp;**if** reservaExitosa: acabar
+&nbsp;&nbsp;**else**: continuar 
 
 
 
