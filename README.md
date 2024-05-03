@@ -135,7 +135,7 @@ $\implies$ La cordenada en la posición &nbsp; $3·n + k$ &nbsp;será &nbsp; $\b
   
 
 
-![image info](./assets/table-vec.png)
+> ![image info](./assets/table-vec.png)
 
 Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las 4*n celdas a una distacia n, comenzando en la esquina izquierda y avanzando según la dirección de vecDir, hasta recorrer n celdas (1/4 de todas), y con ellas generamos el resto de forma que estén en orden antihorario.
 
