@@ -137,7 +137,7 @@ Ilustraremos ahora como funciona el algoritmo, considerando como centro dado la 
 
 - **Distancia 2:** Comenzamos en la casilla a la izquierda del origen y distancia 2, la $(0, -2)$, que colocamos en la posición 0 del *array* ***coords***. A continuación generamos las coordenadas en las posiciones 2, 4 y 6 respectivamente. Ahora nos desplazamos diagonalmente, recorriendo el lado del cuadrado, hasta el punto $(0, -2) + (1, 1) = (1, -1)$, lo colocamos en la posicion 1 y generamos las coordenadas en las posiciones 3, 5 y 7 respectivamente. Ya hemos generado los ocho vecinos a distancia 2, luego hemos acabado. De nuevo, trasladamos todas las coordenadas sumándoles $(x, y)$.
 
-- **Distancia** $i$ **:** Comenzamos en la casilla $(0, -i)$ y la colocamos en la posición 0 del *array*. A continuación generamos con esta coordenada las casillas en las posiciones &nbsp; $i$, &nbsp; $2·i$ &nbsp; y &nbsp; $3·i$. Ahora le sumamos a esta casilla inicial $(1, 1)$ para llegar a la casilla $(1, 1 - i)$ y continuamos este proceso $i$ veces hasta terminar de generar todos los vecinos del origen a distancia $i$. Acabamos trasladando las coordenadas.
+- **Distancia** $i$ **:** Comenzamos en la casilla $(0, -i)$ y la colocamos en la posición 0 del *array*. A continuación generamos con esta coordenada las casillas en las posiciones &nbsp; $i$, &nbsp; $2·i$ &nbsp; y &nbsp; $3·i$. Ahora le sumamos a esta casilla inicial $(1, 1)$ para llegar a la casilla $(1, 1 - i)$ y continuamos este proceso $i$ veces hasta terminar de generar todos los vecinos del origen a distancia $i$. Finalmente trasladamos las coordenadas de nuevo.
 
 ![image info](./assets/table-vec.png)
 
