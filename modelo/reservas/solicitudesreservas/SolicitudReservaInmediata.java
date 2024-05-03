@@ -121,7 +121,7 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
     }
 
     /** 
-     * Se añaden a un ArrayList las coords válidas, ya que no se conoce de antemano cuantas válidas habrán
+     * Se añaden a un ArrayList las coords válidas, ya que en generarVecinos se generan todos los vecinos, pertenezcan o no al gestorLocalidad
      * @param coordsValidas ArrayList donde se almacenan las coordenadas válidas, respetando el orden antihorario
      * @param coords Array con todas las coordenadas, válidas o no, a una determinada distancia en orden antihorario
      * @param gestor GestorLocalidad donde se comprueba la validez de las coordenadas

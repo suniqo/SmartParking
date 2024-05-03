@@ -126,7 +126,7 @@ public class SolicitudReserva {
     /**
      * Indica si la solicitud de reserva es válida en el gestor de localidad provisto
      * @param gestorLocalidad GestorLocalidad dónde se desea comprobar la validez de la reserva
-     * @return True si existe las zona de la solicitud en gestorLocalidad, el comienzo de la reserva es previo al fin y el vehículo no está sancionado, e.o.c. false 
+     * @return True si existe la zona de la solicitud en gestorLocalidad, el comienzo de la reserva es previo al fin y el vehículo no está sancionado, e.o.c. false 
      */
 	public boolean esValida(GestorLocalidad gestorLocalidad) {
         return gestorLocalidad.existeZona(iZona, jZona)
