@@ -30,14 +30,26 @@ public class ControladorReservas {
 	private Reservas registroReservas;
 	private GestorLocalidad gestorLocalidad;
 
+    /**
+     * Método getter del atributo gestorLocalidad
+     * @return gestorLocalidad atributo
+     */
 	public GestorLocalidad getGestorLocalidad() {
 		return gestorLocalidad;
 	}
 
+	/**
+     * Método getter del atributo registroReservas
+     * @return registroReservas atributo
+     */
 	public Reservas getRegistroReservas() {
 		return registroReservas;
 	}
 
+	/**
+     * Método que comprueba si una reserva asociada a una zona, num de reserva y num de matrícula es válida
+     * @return True en caso de que exitsa reserva con ese  num de reserva y pueda validarse, e.o.c False
+     */
 	public boolean esValidaReserva(int i, int j, int numPlaza, int numReserva, String noMatricula) {
 		Reserva reserva = this.registroReservas.obtenerReserva(numReserva);
 		if (reserva == null)
@@ -45,7 +57,6 @@ public class ControladorReservas {
 		reserva.validar(i, j, numPlaza, noMatricula, gestorLocalidad);
 		return reserva.getEstadoValidez() == EstadoValidez.OK;
 	}
-
 
     /**
      * Constructor de ControladorReservas
