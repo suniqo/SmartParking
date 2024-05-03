@@ -124,10 +124,10 @@ private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
     }
 }
 ```
-Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 )$. De este modo, sea $dist = n$ la distancia dada, si conocemos una coordenada en la posición &nbsp; $i < n$, podemos determinar las que se encuentran en las posiciones &nbsp; $n + i, 2*n + i y 3*n + i$.
+Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 )$. De este modo, sea $dist = n$ la distancia dada, si conocemos una coordenada en la posición $i < n$, podemos determinar las que se encuentran en las posiciones &nbsp; $n + i, 2·n + i y 3*n + i$.
 
 Para hallarlas, utizamos el siguiente método:  
-Sean &nbsp;$dist = n$, la distancia dada y &nbsp; $\bar{v_1} = ( i, j )$ &nbsp; la coordenada en la posición &nbsp; $k \in \lbrace0, \dots, \frac{n}{4} - 1 \rbrace$  
+Sean $dist = n$, la distancia dada y &nbsp; $\bar{v_1} = ( i, j )$ &nbsp; la coordenada en la posición &nbsp; $k \in \lbrace0, \dots, \frac{n}{4} - 1 \rbrace$  
 $\implies$ La cordenada en la posición &nbsp; $1·n + k$ &nbsp;será &nbsp; $\bar{v_2} = (-j,  i )$  
 $\implies$ La cordenada en la posición &nbsp; $2·n + k$ &nbsp;será &nbsp; $\bar{v_3} = (-i, -j )$  
 $\implies$ La cordenada en la posición &nbsp; $3·n + k$ &nbsp;será &nbsp; $\bar{v_4} = ( j, -i )$  
