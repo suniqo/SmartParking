@@ -127,10 +127,12 @@ private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
 Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 )$. De este modo, sea $dist = n$ la distancia dada, si conocemos una coordenada en la posición i < n, podemos determinar las que se encuentran en las posiciones n + i, 2*n + i y 3*n + i.
 
 Para hallarlas, utizamos el siguiente método:\
-Sean $dist = n$, e $\bar{v_1} = ( i, j )$ la coordenada en la posición $k \in \lbrace0, \dots, \frac{n}{4} - 1 \rbrace$ se verifica que 
+Sean $dist = n$, la distancia dada y $\bar{v_1} = ( i, j )$ la coordenada en la posición $k \in \lbrace0, \dots, \frac{n}{4} - 1 \rbrace$ se verifica que:
 - La cordenada en la posición  $1·n + k$ es $\bar{v_2} = (-j,  i )$
 - La cordenada en la posición  $2·n + k$ es $\bar{v_2} = (-i, -j )$
 - La cordenada en la posición  $3·n + k$ es $\bar{v_2} = ( j, -i )$
+
+
 
 ![image info](./assets/table-vec.png)
 
