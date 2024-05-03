@@ -80,7 +80,7 @@ En la geometría de Manhattan se cumple que $dist(\bar{v},\bar{v}') = |x - x'| +
 
 Adicionalmente nótese que el número de celdas dentro del conjunto $\overline{B_n}(\bar{o}) = \lbrace(x, y): dist(\bar{o}, \bar{x}) \leq n\rbrace$, por lo discutido, será: $$1 + 4·1 + 4·2 + \dots + 4·n = 1 + 4·\displaystyle\sum_{i=1}^{n} i = 4·\frac{n·(n + 1)}{2} + 1 = 2·n·(n + 1) + 1$$
 
-En conclusión, en este espacio un círculo de radio $n$ tendrá una circunferencia de $4·n$, y un área de $2·n·(n + 1) + 1$.
+En conclusión, en este espacio, un círculo de radio $n$ tendrá una circunferencia de $4·n$, y un área de $2·n·(n + 1) + 1$.
 
 ```java
 for (int dist = 1; dist <= radio && !reservado; dist++) {
@@ -96,7 +96,7 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
-Después de generar los vecinos, se añaden al *ArrayList* **coordsValidas** aquellas coordenadas que existan en el *GestorLocalidad* **gestor** en el método ***anadirCoordsValidas*** y se ordenan utilizando un BubbleSort en ***ordenarPorPrecio()***.
+Después de generar los vecinos, se añaden al *ArrayList* **coordsValidas** aquellas coordenadas que existan en el *GestorLocalidad* **gestor** en el método ***anadirCoordsValidas()***, y se ordenan utilizando un BubbleSort en ***ordenarPorPrecio()***.
 Como las coordenadas de **cords** se colocan en el *array* en orden antihorario y se colocan en el *ArrayList* del mismo modo, al ordenarlos en el BubbleSort, como solo se intercambian dos elementos si uno tiene mayor precio que el siguiente, si dos coordenadas tienen el mismo precio se quedarán ordenadas en sentido antihorario.
 
 Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en cada una de forma ordenada en ***intentarReserva()*** hasta que se tenga éxito o se fracase con todas las coordenadas con $dist \leq n$, como se comentó previamente.
