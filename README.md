@@ -97,7 +97,7 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 ```
 
 Después de generar los vecinos, se añaden al *ArrayList* **coordsValidas** aquellas coordenadas que existan en el *GestorLocalidad* **gestor** en el método ***anadirCoordsValidas()***, y se ordenan utilizando un BubbleSort en ***ordenarPorPrecio()***.
-Como las coordenadas de **cords** se colocan en el *array* en orden antihorario y se colocan en el *ArrayList* del mismo modo, al ordenarlos en el *BubbleSort*, que no altera el orden de dos elementos con el mismo precio, si dos coordenadas tienen el mismo precio se quedarán ordenadas en sentido antihorario.
+Como las coordenadas de **coords** se colocan en el *array* en orden antihorario y se colocan en el *ArrayList* del mismo modo, al ordenarlos en el *BubbleSort*, que no altera el orden de dos elementos con el mismo precio, si dos coordenadas tienen el mismo precio se quedarán ordenadas en sentido antihorario.
 
 Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en cada una de forma ordenada en ***intentarReserva()*** hasta que se tenga éxito o se fracase con todas las coordenadas con $dist \leq n$, como se comentó previamente.
 
