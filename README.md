@@ -134,7 +134,7 @@ $\implies$ La cordenada en la posición &nbsp; $3·n + k$ &nbsp;será &nbsp; $\b
 
 ![image info](./assets/table-vec.png)
 
-Ilustraremos ahora como funciona el algoritmo, considerando como centro dado la coordenada $(x, y)$.
+Ilustraremos ahora como funciona el algoritmo, considerando como centro dado la coordenada $(x, y)$:
 - **Distancia 1:** Comenzamos en la casilla a la izquierda del origen, la $(0, -1)$, que colocamos en la posición 0 del *array* ***coords***. A continuación generamos el resto de coordenadas usando el método anterior, colocándolas en las posiciones 1, 2 y 3 respectivamente. Ya hemos generado los cuatro vecinos a distancia 1, luego hemos acabado. Finalmente para que el centro sea el punto $(x, y)$, en lugar del $(0, 0)$, le sumamos $(x, y)$ a todas las coordenadas para trasladarlas.
 
 - **Distancia 2:** Comenzamos en la casilla a la izquierda del origen y distancia 2, la $(0, -2)$, que colocamos en la posición 0 del *array* ***coords***. A continuación generamos las coordenadas en las posiciones 2, 4 y 6 respectivamente. Ahora nos desplazamos diagonalmente, recorriendo el lado del cuadrado, hasta el vector $(0, -2) + (1, 1) = (1, -1)$, lo colocamos en la posicion 1 y generamos las coordenadas en las posiciones 3, 5 y 7 respectivamente. Ya hemos generado los ocho vecinos a distancia 2, luego hemos acabado. De neuvo, trasladamos todas las coordenadas sumándolas $(x, y)$.
