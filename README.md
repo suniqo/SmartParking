@@ -127,15 +127,16 @@ private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
 Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 )$. De este modo, sea $dist = n$ la distancia dada, si conocemos una coordenada en la posición $i < n$, podemos determinar las que se encuentran en las posiciones &nbsp; $n + i$, &nbsp; $2·n + i$ &nbsp; y &nbsp; $3·n + i$.
 
 Para hallarlas, utizamos el siguiente método:  
-Sean $dist = n$, la distancia dada y &nbsp; $\bar{v_1} = ( i, j )$ &nbsp; la coordenada en la posición &nbsp; $k \in \lbrace0, \dots, \frac{n}{4} - 1 \rbrace$  
+Sean $dist = n$, la distancia dada y &nbsp; $\bar{v_1} = ( i, j )$ &nbsp; una coordenada en la posición &nbsp; $k \in \lbrace0, \dots, \frac{n}{4} - 1 \rbrace$  
 $\implies$ La cordenada en la posición &nbsp; $1·n + k$ &nbsp;será &nbsp; $\bar{v_2} = (-j,  i )$  
 $\implies$ La cordenada en la posición &nbsp; $2·n + k$ &nbsp;será &nbsp; $\bar{v_3} = (-i, -j )$  
 $\implies$ La cordenada en la posición &nbsp; $3·n + k$ &nbsp;será &nbsp; $\bar{v_4} = ( j, -i )$  
-  
-  
-
 
 ![image info](./assets/table-vec.png)
+
+En el ejemplo superior ilustramos como funciona el algoritmo.
+- **Distancia 1:** Comenzamos en la casilla a la izquierda del origen, la $(0, -1)$, que colocamos en la posición 0 del *array* ***coords***. A continuación generamos el resto de coordenadas usando el método anterior, colocándolas en las posiciones 1, 2 y 3 respectivamente. Ya hemos generado los cuatro vecinos a distancia 1, luego hemos acabado.
+
 
 Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las 4*n celdas a una distacia n, comenzando en la esquina izquierda y avanzando según la dirección de vecDir, hasta recorrer n celdas (1/4 de todas), y con ellas generamos el resto de forma que estén en orden antihorario.
 
