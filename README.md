@@ -26,7 +26,7 @@ while not reservado and dist <= n:
 De este modo, en cada iteración $i$, generamos las coordenadas adyacentes (vecinos) con $dist = i \in \lbrace 1, \dots, n \rbrace$ en orden antihorario.
 Tras eliminar aquellos que están fuera de rango y reordenarlos según su precio, intentamos reservar plaza en la primera zona que podamos, siguiendo el orden definido.
 Si se logra reservar en alguna, se sale del bucle; en otro caso se repite el proceso con $dist = i + 1$.
-La ejecución finaliza si se logra reservar plaza en alguna de las iteraciones, o si logra reservar en ningún vecino con $dist \leq n$.
+La ejecución finaliza si se logra reservar plaza en alguna de las iteraciones, o si no se logra reservar en ningún vecino con $dist \leq n$.
 
 ### Desarrollo del método
 
