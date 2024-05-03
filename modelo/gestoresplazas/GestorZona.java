@@ -29,39 +29,69 @@ public class GestorZona {
     private IList<SolicitudReservaAnticipada> listaEspera;
     private GestorHuecos gestorHuecos;
     private IList<Hueco> huecosReservados;
-
+    
+    /**
+     * Método getter del atributo iZona
+     * @return iZona atributo
+     */
     public int getI() {
         return iZona;
     }
 
+    /**
+     * Método getter del atributo jZona
+     * @return jZona atributo
+     */
     public int getJ() {
         return jZona;
     }
 
+    /**
+     * Método getter del atributo precio
+     * @return precio atributo
+     */
     public double getPrecio() {
         return precio;
     }
 
+    /** Método toString del Id asociado al gestor de zona
+     * @return String representativo de la zona en la que se encuentra el gestor de zona
+     */
     public String getId() {
         return "z" + iZona + ":" + jZona;
     }
 
+    /** Método toString del estado del gestor de huecos
+     * @return String representativo del estado de cada plaza del gestor de zona 
+     */
     public String getEstadoHuecosLibres() {
         return this.gestorHuecos.toString();
     }
 
+    /** Método toString del ArrayList asociado a los huecos reservados 
+     * @return String representativo con los huecos reservados hasta el momento
+     */
     public String getEstadoHuecosReservados() {
         return this.huecosReservados.toString();
     }
 
+    /** Método toString del ArrayList asociado a la lista de espera 
+     * @return String representativo con las solicitudes de reserva anticipada que se encuentran en espera
+     */
     public String getListaEspera() {
         return this.listaEspera.toString();
     }
 
+    /** Método toString del atributo plazas
+     * @return String representativo con el estado de cada plaza del gestor de zona
+     */
     public String getPlazas() {
         return Arrays.toString(this.plazas);
     }
 
+    /** Método toString que proporciona información sobre la zona del gestor de zona y los huecos reservados
+     * @return String representativo de una solicitud de reserva
+     */
     public String toString() {
         return getId() + ": " + getEstadoHuecosReservados();
     }

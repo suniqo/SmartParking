@@ -43,7 +43,7 @@ public class SolicitudReserva {
 		this.vehiculo = vehiculo;
 	}
 
-    /** Métodod toString de SolicitudReserva
+    /** Método toString de SolicitudReserva
      * @return String representativo de una solicitud de reserva
      */
 	public String toString() {

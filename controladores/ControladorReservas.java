@@ -128,13 +128,13 @@ public class ControladorReservas {
         registroReservas.borrarReserva(numReserva);
 	}
 
-		
 	// PRE (no es necesario comprobar): todas las solicitudes atendidas son válidas.
     
     /**
      * Se obtienen las reservas que pueden ser atendidas de la zona indicada, y se registran en el registro de reservas
      * @param i Componente i de la zona del gestor de localidad
      * @param j Componente j de la zona del gestor de localidad
+     * @return Lista de reservas que han podido ser atendidas
      */
 	public IList<Integer> getReservasRegistradasDesdeListaEspera(int i, int j){
         IList<SolicitudReservaAnticipada> solicitudesAtendidas = gestorLocalidad.getSolicitudesAtendidasListaEspera(i, j);
