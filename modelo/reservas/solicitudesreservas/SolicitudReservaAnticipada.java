@@ -12,10 +12,10 @@ import modelo.vehiculos.Vehiculo;
 @Programacion2 (
 		nombreAutor1 = "Andrés",
 		apellidoAutor1 = "Súnico Sánchez",
-		emailUPMAutor1 = "andres.sunico",
+		emailUPMAutor1 = "andres.sunico@alumnos.upm.es",
 		nombreAutor2 = "Samuel",
 		apellidoAutor2 = "Álvarez Salido",
-		emailUPMAutor2 = "samuel.alvarez"
+		emailUPMAutor2 = "samuel.alvarez@alumnos.upm.es"
 		)
 public class SolicitudReservaAnticipada extends SolicitudReserva {
 
