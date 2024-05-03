@@ -1,5 +1,5 @@
 
-<h1 align="center"> Documentación adicional </h1>
+<h1 align="center"> SmartParking </h1>
 
 ## GestionarSolicitudReserva
 
@@ -60,7 +60,7 @@ La función principal es la siguiente:
 
 ```
 
-Tras comprobar la validez del gestor, si no se consigue reservar hueco en la zona deseada se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un *array* bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$. A continuación se llama a ***generarVecinos()*** que rellena el *array* **coords** de estos vecinos, colocándolos en orden antihorario.
+Tras comprobar la validez del gestor, si no se consigue reservar plaza en la zona deseada se comienza a buscar en los alrededores. De este modo comenzamos a recorrer las distintas distancias con el bucle principal, creando en cada iteración un *array* bidimensional de tamaño $4·dist \times 2$, que almacene los vecinos a distancia $dist$. A continuación se llama a ***generarVecinos()*** que rellena el *array* **coords** de estos vecinos, colocándolos en orden antihorario.
 
 ```java
 for (int dist = 1; dist <= radio && !reservado; dist++) {
