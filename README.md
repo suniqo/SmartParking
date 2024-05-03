@@ -133,6 +133,8 @@ Sean $dist = n$, la distancia dada y $\bar{v_1} = ( i, j )$ la coordenada en la 
 - La cordenada en la posición  $3·n + k$ es $\bar{v_2} = ( j, -i )$
   
   
+
+
 ![image info](./assets/table-vec.png)
 
 Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las 4*n celdas a una distacia n, comenzando en la esquina izquierda y avanzando según la dirección de vecDir, hasta recorrer n celdas (1/4 de todas), y con ellas generamos el resto de forma que estén en orden antihorario.
