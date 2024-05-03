@@ -141,8 +141,8 @@ Ilustraremos ahora como funciona el algoritmo, considerando como centro dado la 
 
 - **Distancia** $i$ **:** Comenzamos en la casilla $(0, -i)$ y la colocamos en la posición 0 del *array*. A continuación generamos con esta coordenada las casillas en las posiciones &nbsp; $n + i$, &nbsp; $2·n + i$ &nbsp; y &nbsp; $3·n + i$. Ahora le sumamos a esta casilla inicial $(1, 1)$ para llegar a la casilla $(1, 1 - i)$ y continuamos este proceso $i$ veces hasta terminar de generar todos los vecinos del origen a distancia $i$. Acabamos trasladando las coordenadas.
 
-Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las 4*n celdas a una distacia n, comenzando en la esquina izquierda y avanzando según la dirección de vecDir, hasta recorrer n celdas (1/4 de todas), y con ellas generamos el resto de forma que estén en orden antihorario.
+Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las $4·n$ celdas a una distacia $n$, comenzando en la esquina izquierda y avanzando según la dirección de ***vecDir***, hasta recorrer $n$ celdas ($\frac{1}{4}$ de todas), generando con ellas el resto de coordenadas, de forma que estén en orden antihorario.  
+Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando ***(iZona, jZona)***.
 
-Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando {iZona, jZona}.
-Luego, sean n el número de coordenadas a una distacia dada, nuestro algoritmo
-tiene una complejidad O(n), es decir, tiene una complejidad lineal.
+Luego, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)$ coordenadas, que el algoritmo generará en ese mismo número de iteraciones.  
+Por tanto, el algoritmo tiene una complejidad $O(n)$, es decir, complejidad lineal.
