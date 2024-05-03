@@ -131,8 +131,8 @@ Sean $dist = n$, la distancia dada y $\bar{v_1} = ( i, j )$ la coordenada en la 
 - La cordenada en la posición  $1·n + k$ es $\bar{v_2} = (-j,  i )$
 - La cordenada en la posición  $2·n + k$ es $\bar{v_2} = (-i, -j )$
 - La cordenada en la posición  $3·n + k$ es $\bar{v_2} = ( j, -i )$
-
-
+\
+\
 
 ![image info](./assets/table-vec.png)
 
