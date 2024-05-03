@@ -128,9 +128,9 @@ Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos
 
 Para hallarlas, utizamos el siguiente método:  
 Sean &nbsp;$dist = n$, la distancia dada y &nbsp; $\bar{v_1} = ( i, j )$ &nbsp; la coordenada en la posición &nbsp; $k \in \lbrace0, \dots, \frac{n}{4} - 1 \rbrace$  
-$\implies$ La cordenada en la posición &nbsp; $1·n + k$ &nbsp;será &nbsp;$\bar{v_2} = (-j,  i )$  
-$\implies$ La cordenada en la posición &nbsp; $2·n + k$ &nbsp;será &nbsp;$\bar{v_3} = (-i, -j )$  
-$\implies$ La cordenada en la posición &nbsp; $3·n + k$ &nbsp;será &nbsp;$\bar{v_4} = ( j, -i )$  
+$\implies$ La cordenada en la posición &nbsp; $1·n + k$ &nbsp;será &nbsp; $\bar{v_2} = (-j,  i )$  
+$\implies$ La cordenada en la posición &nbsp; $2·n + k$ &nbsp;será &nbsp; $\bar{v_3} = (-i, -j )$  
+$\implies$ La cordenada en la posición &nbsp; $3·n + k$ &nbsp;será &nbsp; $\bar{v_4} = ( j, -i )$  
   
   
 
