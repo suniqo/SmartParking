@@ -23,7 +23,7 @@ while not reservado and dist <= n:
     dist <- dist + 1
 ```
 
-De este modo, en cada iteración $i$, generamos los vecinos con $dist = i \in \lbrack 1, \dots, n \rbrack$ en orden antihorario.
+De este modo, en cada iteración $i$, generamos los vecinos con $dist = i \in \lbrace 1, \dots, n \rbrace$ en orden antihorario.
 Tras eliminar aquellos fuera de rango y reordenarlos por precio, intentamos reservar en cada uno de los vecinos ordenadamente.
 Si se logra reservar, se sale del bucle; en otro caso se repite el proceso con $dist = i + 1$.
 La ejecución finaliza si o bien se logra reservar en cualquiera de las iteraciones, o bien no se logra reservar en ningún vecino con $dist \leq n$.
@@ -124,7 +124,13 @@ private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
     }
 }
 ```
-Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 ). De este modo, sea $dist = n$ la distancia dada, si conocemos una coordenada en la posición i < n, podemos determinar las que se encuentran en las posiciones n + i, 2*n + i y 3*n + i.
+Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 )$. De este modo, sea $dist = n$ la distancia dada, si conocemos una coordenada en la posición i < n, podemos determinar las que se encuentran en las posiciones n + i, 2*n + i y 3*n + i.
+
+Para hallarlas, utizamos el siguiente método:\
+Sean $dist = n \implies nº de puntos = 4·n$, e $\bar{v_1} = ( i, j )$ la coordenada en la posición $k \in \lbrace0, \dots, \frac{n}{4} - 1 \rbrace$ se verifica que 
+- La cordenada en la posición $1·n + k$ es $\bar{v_2} = (-j,  i )$
+- La cordenada en la posición $2·n + k$ es $\bar{v_2} = (-i, -j )$
+- La cordenada en la posición $3·n + k$ es $\bar{v_2} = ( j, -i )$
 
 ![image info](./assets/table-vec.png)
 
@@ -133,12 +139,3 @@ Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadra
 Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando {iZona, jZona}.
 Luego, sean n el número de coordenadas a una distacia dada, nuestro algoritmo
 tiene una complejidad O(n), es decir, tiene una complejidad lineal.
-
-
-|    -2   |    -1   |    0   |    1   |    2   |
-|:-------:|:-------:|:------:|:------:|:------:|
-| (-2,-2) | (-2,-1) | (-2,0) | (-2,1) | (-2,2) |
-| (-1,-2) | (-1,-1) | (-1,0) | (-1,1) | (-1,2) |
-|  (0,-2) |  (0,-1) |  (0,0) |  (0,1) |  (0,2) |
-|  (1,-2) |  (1,-1) |  (1,0) |  (1,1) |  (1,2) |
-|  (2,-2) |  (2,-1) |  (2,0) |  (2,1) |  (2,2) |
