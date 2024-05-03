@@ -23,15 +23,25 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
     
     private int radio;
 
+    /**
+     * Constructor de SolicitudReservaInmediata
+     * @param i Componente i de la zona dónde se desea reservar
+     * @param j Componente j de la zona dónde se desea reservar
+     * @param tI Comienzo de la solicitud de reserva
+     * @param tF Fin de la solicitud de reserva
+     * @param vehiculo Vehículo con el que se desea aparcar
+     * @param radio Radio máximo en el que se desea comprobar zonas, en caso de fallo al reservar
+     */
     public SolicitudReservaInmediata(int i, int j, LocalDateTime tI, LocalDateTime tF, Vehiculo vehiculo, int radio) {
         super(i, j, tI, tF, vehiculo);
         this.radio = radio;
     }
     
-    private int max(int x, int y) {
-        return x > y ? x : y;
-    }
-
+    /**
+     * Indica si la solicitud de reserva es válida en el gestor de localidad provisto
+     * @param gestor GestorLocalidad dónde se desea comprobar la validez de la reserva
+     * @return Si el padre valida la solicitud, true si el radio es menor que la distancia máxima a una zona de la localidad, e.o.c. false.
+     */
     @Override
     public boolean esValida(GestorLocalidad gestor) {
         if(radio > 0 && super.esValida(gestor)) {
@@ -44,6 +54,21 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         return false;
     }
     
+    /**
+     * Método auxiliar para calcular el máximo de dos números
+     * @param x Primer dígito a comprobar
+     * @param y Segundo dígito a comprobar
+     * @return Máximo entre x e y
+     */
+    private int max(int x, int y) {
+        return x > y ? x : y;
+    }
+
+    /**
+     * Se intenta gestionar la solicitud en la zona deseada, si falla se busca en las zonas a distancia menor o igual al atributo radio,
+     * comprobando primero las mas cercanas, en orden antihorario y de menor a mayor precio
+     * @param gestor GestorLocalidad dónde se desea realizar la reserva
+     */
     @Override
     public void gestionarSolicitudReserva(GestorLocalidad gestor) {
         if (esValida(gestor)) {
@@ -56,9 +81,6 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
 
                 for (int dist = 1; dist <= radio && !reservado; dist++) {
 
-                    // En cada iteración se generan los vecinos a la distacia determinada por el bucle,
-                    // y se añaden a un array en orden antihorario, cada una almacenada en forma {i, j}.
-                    // El tamaño es dist * 4, ya que a distancia 1 hay 4 celdas, a 2: 8, a 3: 12, etc.
                     int[][] coords = new int[dist * 4][2];
                     generarVecinos(coords, dist, super.getIZona(), super.getJZona());
 
@@ -73,20 +95,13 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
     }
 
 
-    /*** Métodos Auxiliares ***/
-
-    // Para generar los vecinos a una distacia dada en orden antihoarario, aprovechamos
-    // la simetría de las coordenadas cuando el centro es el origen {0, 0}.
-    // De este modo, sea n la distancia dada, si conocemos una coordenada
-    // en la posición i < n, podemos determinar las que se encuentran en las
-    // posiciones n + i, 2*n + i y 3*n + i.
-    // Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado
-    // que forman las 4*n celdas a una distacia n, comenzando en la esquina izquierda
-    // y avanzando según la dirección de vecDir, hasta recorrer n celdas (1/4 de todas),
-    // y con ellas generamos el resto de forma que estén en orden antihorario.
-    // Una vez se tienen los vecinos con origen enn el {0, 0}, se trasladan sumando {iZona, jZona}.
-    // Luego, sean n el número de coordenadas a una distacia dada, nuestro algoritmo
-    // tiene una complejidad O(n), es decir, tiene una complejidad lineal.
+    /** 
+     * Se almacenan en el array coords las coordenadas de todos los puntos a la distancia dada, en orden antihorario
+     * @param coords Array donde se almacenan las coordenadas
+     * @param dist Distancia en la cual se quieren generar los puntos
+     * @param iZona Componente i del centro donde se comienza a buscar
+     * @param jZona Componente j del centro donde se comienza a buscar
+     */
     private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
         
         int[] inicio = {0, -dist};
@@ -105,7 +120,12 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
-    // Se añaden a un ArrayList las coords válidas ya que no se conoce de antemano cuantas habrá que eliminar.
+    /** 
+     * Se añaden a un ArrayList las coords válidas, ya que no se conoce de antemano cuantas válidas habrán
+     * @param coordsValidas ArrayList donde se almacenan las coordenadas válidas, respetando el orden antihorario
+     * @param coords Array con todas las coordenadas, válidas o no, a una determinada distancia en orden antihorario
+     * @param gestor GestorLocalidad donde se comprueba la validez de las coordenadas
+     */
     private void anadirCoordsValidas(ArrayList<int[]> coordsValidas, int[][] coords, GestorLocalidad gestor) {
         for (int[] coord: coords) {
             if (gestor.existeZona(coord[0], coord[1])) {
@@ -114,28 +134,30 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
-    // Utilizamos un BubbleSort simple para ordenar las coordenadas válidas del ArrayList
-    // según el precio de su gestor de zona correspondiente.
-    // Como las coordenadas ya están en orden antihorario, si dos tienen el mismo precio
-    // quedarán ordenadas de forma correcta, ya que el algoritmo no alterará su orden.
-    private void ordenarPorPrecio(ArrayList<int[]> coords, GestorLocalidad gestor) {
-        int length = coords.size();
+    /**
+     * BubbleSort para ordenar las coordenadas válidas de menor a mayor precio
+     * (en caso de empate no hay intercambios, respetando el orden antihorario)
+     * @param coordsValidas ArrayList de coordenadas válidas que se desea reordenar
+     * @param gestor GestorLocalidad dónde se desea consultar el precio de cada coordenada válida
+     */
+    private void ordenarPorPrecio(ArrayList<int[]> coordsValidas, GestorLocalidad gestor) {
+        int length = coordsValidas.size();
 
         boolean ordenado = false;
         for (int i = 0; i < length - 1 && !ordenado; i++) {
 
             ordenado = true;
             for (int j = 0; j < length - i - 1; j++) {
-                int[] coord1 = coords.get(j);
-                int[] coord2 = coords.get(j + 1);
+                int[] coord1 = coordsValidas.get(j);
+                int[] coord2 = coordsValidas.get(j + 1);
 
                 GestorZona gestorZona1 = gestor.getGestorZona(coord1[0], coord1[1]);
                 GestorZona gestorZona2 = gestor.getGestorZona(coord2[0], coord2[1]);
 
                 if (gestorZona1.getPrecio() > gestorZona2.getPrecio()) {
                     int[] aux = {coord1[0], coord1[1]};
-                    coords.set(j, coord2);
-                    coords.set(j + 1, aux);
+                    coordsValidas.set(j, coord2);
+                    coordsValidas.set(j + 1, aux);
 
                     ordenado = false;
                 }
@@ -143,7 +165,12 @@ public class SolicitudReservaInmediata extends SolicitudReserva {
         }
     }
 
-    //Si en algún momento se logra reservar, se escapa del bucle ya que el proceso ha finalizado.
+    /**
+     * Se intenta realizar las reservas de las coordenadas válidas ordenadamente, en caso de lograrlo se sale del bucle
+     * @param coordsValidas ArrayList con las coordenadas válidas ordenadas correctamente
+     * @param gestor GestorLocalidad dónde se desea intentar reservar en las zonas almacenadas en el ArrayList
+     * @return True si se logra reservar en alguna de las coordenadas válidas, e.o.c false
+     */
     private boolean intentarReservar(ArrayList<int[]> coordsValidas, GestorLocalidad gestor) {
 
         Hueco hueco;
