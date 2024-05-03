@@ -126,7 +126,7 @@ private void generarVecinos(int[][] coords, int dist, int iZona, int jZona) {
 ```
 Para generar los vecinos a una distancia dada en orden antihorario, aprovechamos la simetría de las coordenadas cuando el centro es el origen $( 0, 0 )$. 
 
-Para hallarlas, utizamos el siguiente método:  
+Para hallarlas, utilizamos el siguiente método:  
 Sean $dist = n$, la distancia dada y &nbsp; $\bar{v_1} = ( i, j )$ &nbsp; una coordenada en la posición &nbsp; $k \in \lbrace0, \dots, \frac{4·n}{4} - 1 \rbrace$  
 $\implies$ La cordenada en la posición &nbsp; $1·n + k$ &nbsp;será &nbsp; $\bar{v_2} = (-j,  i )$  
 $\implies$ La cordenada en la posición &nbsp; $2·n + k$ &nbsp;será &nbsp; $\bar{v_3} = (-i, -j )$  
