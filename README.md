@@ -144,4 +144,4 @@ Ilustraremos ahora como funciona el algoritmo, considerando como centro dado la 
 Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las $4·n$ celdas a una distacia $n$, comenzando en la esquina izquierda y avanzando según la dirección de ***vecDir***, hasta recorrer $n$ celdas ($\frac{1}{4}$ de todas), generando con ellas el resto de coordenadas, de forma que estén en orden antihorario.  
 Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando ***(iZona, jZona)***.
 
-Luego, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)$ coordenadas y el algoritmo las generará en $1 + 2 + \dots + n$ iteraciones. Por tanto, el algoritmo tiene una complejidad $O\big(\frac{n·(n - 1)}{2}\big)$ \aprox O(n^2) con respecto al radio máximo.
+Luego, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)$ coordenadas y el algoritmo las generará en $1 + 2 + \dots + n$ iteraciones. Por tanto, el algoritmo tiene una complejidad $O\big(\frac{n·(n - 1)}{2}\big)$ \approx O(n^2) con respecto al radio máximo.
