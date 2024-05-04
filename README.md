@@ -101,7 +101,7 @@ Como las coordenadas de **coords** se colocan en el *array* en orden antihorario
 
 Finalmente, una vez se tienen todas las coordenadas válidas, se intenta hacer una reserva en aquella más óptima según el orden definido en ***intentarReserva()***, hasta que se tenga éxito o se fracase en todas las coordenadas con $dist \leq n$.
 
-#### Función generarVecinos()
+#### Función ***generarVecinos()***
 
 De todas las funciones auxiliares, tan solo se comentará ***generarVecinos()*** ya que el resto son bastante triviales, y no hay mucho contenido que explicar. La función es la siguiente:
 
