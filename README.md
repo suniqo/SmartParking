@@ -147,4 +147,4 @@ Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando ***
 ##### Complejidad
 Para generar todas las celdas a distancia $i$ del centro, el algoritmo llevará a cabo $i$ iteraciones, luego tendrá una complejidad lineal $O(n)$.
 
-Por tanto, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)$ (el área del círculo menos el centro) coordenadas en el peor caso, tarea que se llevará a cabo en&nbsp; $1 + 2 + \dots + n$ &nbsp;iteraciones. Por tanto, el algoritmo tiene una complejidad $O\big(\frac{n·(n - 1)}{2}\big) \approx O(n^2)$ con respecto al radio máximo $n$ en el peor de los casos, cuando no se logre reservar en ninguna plaza.
+Por tanto, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)$ coordenadas en el peor caso (el área del círculo menos el centro), tarea que se llevará a cabo en&nbsp; $1 + 2 + \dots + n$ &nbsp;iteraciones. Por tanto, el algoritmo tiene una complejidad $O\big(\frac{n·(n - 1)}{2}\big) \approx O(n^2)$ con respecto al radio máximo $n$ en el peor de los casos, cuando no se logre reservar en ninguna plaza.
