@@ -74,7 +74,7 @@ for (int dist = 1; dist <= radio && !reservado; dist++) {
 
 ```
 
-En la geometría de Manhattan se cumple que $dist(\bar{v},\bar{v}') = |x - x'| + |y - y'|$, por lo que todos los puntos del conjunto $C_n(\bar{o}) = \lbrace \bar{x}: dist(\bar{o}, \bar{x}) = n\rbrace$ forman un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $B_n(\bar{o})$, será $4·n$, es decir, que la circunferencia de un círculo de radio $n$ será $4·n$. Es por esto que se elige este tamaño para el *array* **coords**.
+En la geometría de Manhattan se cumple que $dist(\bar{v},\bar{v}') = |x - x'| + |y - y'|$, por lo que todos los puntos del conjunto $C_n(\bar{o}) = \lbrace \bar{x}: dist(\bar{o}, \bar{x}) = n\rbrace$ forman un cuadrado en lugar de un círculo. Además, se verifica que el número de puntos o celdas en $C_n(\bar{o})$, será $4·n$, es decir, que la circunferencia de un círculo de radio $n$ será $4·n$. Es por esto que se elige este tamaño para el *array* **coords**.
 
 ![image info](./assets/taxicab-ball.png)
 
