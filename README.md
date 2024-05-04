@@ -148,3 +148,14 @@ Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando ***
 Para generar todas las celdas a distancia $i$ del centro, el algoritmo llevará a cabo $i$ iteraciones, luego tendrá una complejidad lineal $O(n)$.
 
 Por tanto, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)$ coordenadas en el peor caso (el área del círculo menos el centro), tarea que se llevará a cabo en&nbsp; $1 + 2 + \dots + n$ &nbsp;iteraciones. Por tanto, el algoritmo tiene una complejidad $O\big(\frac{n·(n - 1)}{2}\big) \approx O(n^2)$ con respecto al radio máximo $n$ en el peor de los casos, cuando no se logre reservar en ninguna plaza.
+
+
+### Complejidad total del método
+
+Para concluir, calculamos la complejidad total del método ***gestionarReserva()*** en el peor caso, sumando la complejidad de cada uno de sus métodos ya que la complejidad del resto de operaciones es despreciable.
+
+En el método, sea $n$ el radio máximo, se llama a las funciones ***generarVecinos()***, ***anadirCoordsValidas()***, ***ordenarPorPrecio***, e ***intentarReservar()*** $n$ veces en el peor caso.
+***anadirCoordsValidas()*** e ***intentarReservar()***, como ***generarVecinos()***, constan de un bucle for que en cada iteración $i$ del bucle principal, tienen también $i$ iteraciones, luego la combinación de la complejidad de los 3 será $O(3·n^2) \approx O(n^2)$. Sin embargo, el BubbleSort tiene una complejidad de $O(i^2)$ en cada iteración $i$, luego su complejidad tras todas sus llamadas será de $O(n^3)$. Por tanto, la complejidad total del método será, en el peor caso, de O(n^3).
+Esta complejidad se podría bajar fácilmente a $O(n^2)$ utilizando otro algoritmo de ordenación como el *QuickSort* o el *MergeSort*.
+
+
