@@ -144,4 +144,7 @@ Ilustraremos ahora como funciona el algoritmo, considerando como centro dado la 
 Por tanto en este algoritmo recorremos tan solo un lado de los cuatro del cuadrado que forman las $4·n$ celdas a una distacia $n$, comenzando en la esquina izquierda y avanzando según la dirección de ***vecDir***, hasta recorrer $n$ celdas ($\frac{1}{4}$ de todas), generando con ellas el resto de coordenadas, de forma que estén en orden antihorario.  
 Una vez se tienen los vecinos con origen en $( 0, 0 )$, se trasladan sumando ***(iZona, jZona)***.
 
-Luego, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)$ coordenadas y el algoritmo las generará en $1 + 2 + \dots + n$ iteraciones. Por tanto, el algoritmo tiene una complejidad $O\big(\frac{n·(n - 1)}{2}\big) \approx O(n^2)$ con respecto al radio máximo $n$.
+##### Complejidad
+Para generar todas las celdas a distancia $i$ del centro, el algoritmo llevará a cabo $i$ iteraciones, luego tendrá una complejidad lineal $O(n)$
+
+Por tanto, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)$ (el área del círculo menos el centro) coordenadas en el peor caso, tarea que se llevará a cabo en&nbsp; $1 + 2 + \dots + n$ &nbsp;iteraciones. Por tanto, el algoritmo tiene una complejidad $O\big(\frac{n·(n - 1)}{2}\big) \approx O(n^2)$ con respecto al radio máximo $n$ en el peor de los casos, cuando no se logre reservar en ninguna plaza.
