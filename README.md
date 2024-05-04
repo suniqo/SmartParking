@@ -155,7 +155,8 @@ Por tanto, sea $n$ el radio máximo dado, se tendrán que generar $2·n·(n + 1)
 Para concluir, calculamos la complejidad total del método ***gestionarReserva()*** en el peor caso, sumando la complejidad de cada uno de sus métodos, ya que la complejidad del resto de operaciones es despreciable.
 
 En el método, considerando a $n$ el radio máximo, se llama a las funciones ***generarVecinos()***, ***anadirCoordsValidas()***, ***ordenarPorPrecio***, e ***intentarReservar()*** $n$ veces en el peor caso.
-***anadirCoordsValidas()*** e ***intentarReservar()***, al igual que ***generarVecinos()***, constan de un bucle for que en cada iteración $i$ del bucle principal, tienen también $i$ iteraciones, luego la combinación de la complejidad de los 3 será $O(3·n^2) \approx O(n^2)$. Sin embargo, el BubbleSort tiene una complejidad de $O(i^2)$ en cada iteración $i$, luego su complejidad tras todas sus llamadas será de $O(n^3)$. Por tanto, la complejidad total del método será, en el peor caso, de O(n^3).
-Esta complejidad se podría bajar fácilmente a $O(n^2)$ utilizando otro algoritmo de ordenación como el *QuickSort* o el *MergeSort*.
+***anadirCoordsValidas()*** e ***intentarReservar()***, al igual que ***generarVecinos()***, constan de un bucle *for* que, en cada iteración $i$ del bucle principal, iteran $i$ veces, luego la combinación de la complejidad de los 3 será $O(3·n^2) \approx O(n^2)$.
+
+Sin embargo, el BubbleSort tiene una complejidad de $O(i^2)$ en cada iteración $i$, luego su complejidad tras todas sus llamadas será de $O(n^3)$. Por tanto, la complejidad total del método será, en el peor caso, de O(n^3). Esta complejidad se podría bajar fácilmente a $O(n^2)$ utilizando otro algoritmo de ordenación como el *QuickSort* o el *MergeSort*.
 
 
